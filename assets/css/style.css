@@ -1,0 +1,4477 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #f5f7fb;
+    color: #1e293b;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* ================================
+   MAIN APP LAYOUT
+================================ */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.sidebar {
+    width: 270px;
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 28px 18px;
+    border-right: 1px solid #e7eaf0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px 35px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+    background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+    border-radius: 14px;
+}
+
+.logo h2 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.logo p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 3px;
+}
+
+/* MENU */
+
+.menu-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #94a3b8;
+
+    padding: 0 12px;
+    margin-bottom: 10px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    text-decoration: none;
+    color: #64748b;
+
+    padding: 14px;
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: 0.25s;
+}
+
+.menu-item:hover {
+    background: #f1f0ff;
+    color: #6d5dfc;
+}
+
+.menu-item.active {
+    background: #eeeaff;
+    color: #6d5dfc;
+}
+
+.menu-icon {
+    font-size: 19px;
+}
+
+/* SIDEBAR BOTTOM */
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.help-card {
+    background: linear-gradient(135deg, #f1efff, #faf5ff);
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.help-card h4 {
+    margin-bottom: 5px;
+}
+
+.help-card p {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* ================================
+   MAIN CONTENT
+================================ */
+
+.main-content {
+    flex: 1;
+    padding: 25px 40px;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.header-left h3 {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.header-left h1 {
+    font-size: 27px;
+    margin-top: 5px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.notification {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+    border: none;
+    background: white;
+
+    cursor: pointer;
+    font-size: 18px;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: white;
+    padding: 7px 14px 7px 8px;
+
+    border-radius: 14px;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1efff;
+}
+
+/* ================================
+   HERO
+================================ */
+
+.hero-card {
+    background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+    color: white;
+
+    padding: 35px;
+    border-radius: 24px;
+
+    margin-bottom: 30px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-card h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.hero-card p {
+    max-width: 600px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.hero-brain {
+    position: absolute;
+    right: 50px;
+    bottom: -10px;
+
+    font-size: 120px;
+    opacity: 0.25;
+}
+
+/* ================================
+   STATS
+================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+}
+
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-icon {
+    font-size: 27px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 18px 0 5px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* ================================
+   SECTION
+================================ */
+
+.section-title {
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    font-size: 22px;
+}
+
+.section-title p {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 5px;
+}
+
+/* ================================
+   FEATURE CARDS
+================================ */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature-card {
+    background: white;
+    padding: 22px;
+
+    border-radius: 18px;
+
+    text-decoration: none;
+    color: inherit;
+
+    transition: 0.25s;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(109,93,252,0.15);
+}
+
+.feature-icon-box {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1efff;
+    border-radius: 15px;
+
+    font-size: 26px;
+
+    margin-bottom: 16px;
+}
+
+.feature-card h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.feature-card p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.feature-arrow {
+    display: block;
+    margin-top: 16px;
+    color: #6d5dfc;
+    font-weight: bold;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+
+    .stats-grid,
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .stats-grid,
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-left h1 {
+        font-size: 21px;
+    }
+
+}
+
+
+/* =================================
+   MEDICINES PAGE
+================================= */
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #6d5dfc;
+    margin-bottom: 8px;
+}
+
+.page-heading h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.page-heading p:last-child {
+    color: #64748b;
+}
+
+.medicine-date {
+    background: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    color: #64748b;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+
+/* MEDICINE SUMMARY */
+
+.medicine-summary {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.medicine-progress-card,
+.next-medicine-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+}
+
+.medicine-progress-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.medicine-progress-card h2 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.summary-text {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.circle-progress {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 800;
+    color: #6d5dfc;
+
+    background:
+        conic-gradient(#6d5dfc 67%, #ecebff 0);
+}
+
+.next-medicine-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.next-icon {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1efff;
+    border-radius: 16px;
+    font-size: 30px;
+}
+
+.next-medicine-card h3 {
+    margin-bottom: 6px;
+}
+
+.next-medicine-card p:last-child {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.upcoming-badge {
+    margin-left: auto;
+    background: #fff4e5;
+    color: #d97706;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* MEDICINE TIMELINE */
+
+.medicine-section {
+    background: white;
+    padding: 28px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+}
+
+.medicine-timeline {
+    margin-top: 25px;
+}
+
+.medicine-item {
+    display: grid;
+    grid-template-columns: 90px 25px 1fr auto;
+    align-items: center;
+    gap: 18px;
+
+    padding: 20px 0;
+    border-bottom: 1px solid #eef0f4;
+}
+
+.medicine-item:last-child {
+    border-bottom: none;
+}
+
+.timeline-time {
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-time strong {
+    font-size: 18px;
+}
+
+.timeline-time span {
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.timeline-line {
+    width: 12px;
+    height: 12px;
+    background: #6d5dfc;
+    border-radius: 50%;
+    position: relative;
+}
+
+.timeline-line::after {
+    content: "";
+    position: absolute;
+
+    width: 2px;
+    height: 70px;
+
+    background: #e5e7eb;
+
+    left: 5px;
+    top: 12px;
+}
+
+.medicine-item:last-child .timeline-line::after {
+    display: none;
+}
+
+.medicine-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.medicine-icon {
+    width: 48px;
+    height: 48px;
+
+    background: #f1efff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+    font-size: 23px;
+}
+
+.medicine-info h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.medicine-info p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.medicine-status {
+    padding: 9px 14px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.medicine-status.taken {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.medicine-reminder-btn {
+    border: none;
+    background: #eeeaff;
+    color: #6d5dfc;
+
+    padding: 11px 17px;
+    border-radius: 10px;
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.medicine-reminder-btn:hover {
+    background: #6d5dfc;
+    color: white;
+}
+
+
+/* HEALTH TIP */
+
+.health-tip {
+    margin-top: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+
+    padding: 20px 25px;
+    border-radius: 18px;
+}
+
+.health-tip-icon {
+    font-size: 30px;
+}
+
+.health-tip h3 {
+    margin-bottom: 5px;
+}
+
+.health-tip p {
+    color: #78716c;
+    font-size: 14px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .medicine-summary {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .page-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .medicine-item {
+        grid-template-columns: 60px 15px 1fr;
+    }
+
+    .medicine-status,
+    .medicine-reminder-btn {
+        grid-column: 3;
+        justify-self: start;
+    }
+
+}
+
+/* =================================
+   COGNITIVE GAMES PAGE
+================================= */
+
+.game-progress-overview {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 35px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+}
+
+.game-progress-text h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.game-progress-text p:last-child {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.game-progress-bar {
+    height: 10px;
+    background: #eeeef5;
+    border-radius: 20px;
+    margin: 22px 0 10px;
+    overflow: hidden;
+}
+
+.game-progress-fill {
+    width: 33%;
+    height: 100%;
+    background: #6d5dfc;
+    border-radius: 20px;
+}
+
+.game-progress-overview > span {
+    color: #6d5dfc;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* GAME GRID */
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.game-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+
+    text-decoration: none;
+    color: inherit;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+
+    transition: 0.25s;
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(109,93,252,0.15);
+}
+
+.game-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 17px;
+    font-size: 27px;
+}
+
+.game-icon.purple {
+    background: #eeeaff;
+}
+
+.game-icon.blue {
+    background: #e8f2ff;
+}
+
+.game-icon.orange {
+    background: #fff1e5;
+}
+
+.game-icon.green {
+    background: #e9f9f0;
+}
+
+.difficulty {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 7px 12px;
+    border-radius: 20px;
+}
+
+.difficulty.easy {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.difficulty.medium {
+    background: #fff4e5;
+    color: #d97706;
+}
+
+.game-card h3 {
+    margin-top: 22px;
+    margin-bottom: 8px;
+    font-size: 19px;
+}
+
+.game-card p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.game-card-footer {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 22px;
+
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.game-card-footer strong {
+    color: #6d5dfc;
+}
+
+
+/* AI PERFORMANCE */
+
+.ai-performance {
+    margin-top: 40px;
+
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+}
+
+.ai-performance-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 28px;
+}
+
+.ai-performance-heading h2 {
+    margin-bottom: 7px;
+}
+
+.ai-performance-heading p:last-child {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.ai-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 28px;
+
+    background: #f1efff;
+    border-radius: 17px;
+}
+
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.performance-label {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.performance-label strong {
+    color: #6d5dfc;
+}
+
+.performance-bar {
+    height: 9px;
+    background: #edf0f5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.performance-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: #6d5dfc;
+}
+
+.fill-memory {
+    width: 72%;
+}
+
+.fill-attention {
+    width: 81%;
+}
+
+.fill-recognition {
+    width: 65%;
+}
+
+.ai-game-insight {
+    margin-top: 28px;
+
+    background: #f5f3ff;
+    padding: 18px;
+
+    border-radius: 14px;
+
+    color: #5b52c7;
+    font-size: 14px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .games-grid,
+    .performance-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* ================================
+   MEMORY MATCH GAME
+================================ */
+
+.game-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-tag {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #6c5ce7;
+    margin-bottom: 8px;
+}
+
+.game-page-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.game-page-header p {
+    color: #6b7280;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #6c5ce7;
+    font-weight: 600;
+    padding: 12px 18px;
+    background: #f1efff;
+    border-radius: 10px;
+}
+
+/* GAME STATS */
+
+.game-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.game-stat-card {
+    background: white;
+    padding: 22px 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-stat-card span {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.game-stat-card strong {
+    font-size: 28px;
+    color: #2d3748;
+}
+
+/* GAME CONTAINER */
+
+.memory-game-container {
+    background: white;
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* CARD GRID */
+
+.memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    max-width: 650px;
+    margin: auto;
+}
+
+/* MEMORY CARD */
+
+.memory-card {
+    height: 130px;
+    border-radius: 18px;
+    border: 2px solid #eceaf8;
+
+    background: linear-gradient(
+        135deg,
+        #6c5ce7,
+        #8e7dff
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 42px;
+    cursor: pointer;
+
+    transition: 
+        transform 0.2s ease,
+        background 0.3s ease;
+}
+
+.memory-card:hover {
+    transform: translateY(-5px);
+}
+
+.memory-card.flipped {
+    background: #ffffff;
+}
+
+.memory-card.matched {
+    background: #e8fff3;
+    border-color: #8ce3b5;
+}
+
+/* GAME ACTIONS */
+
+.game-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.restart-game-btn {
+    border: none;
+    background: #6c5ce7;
+    color: white;
+
+    padding: 14px 25px;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.restart-game-btn:hover {
+    background: #5946d8;
+}
+
+/* RESULT */
+
+.game-result {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 25px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.game-result h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.game-result p {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .game-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .game-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .memory-card {
+        height: 110px;
+    }
+}
+/* =================================
+   NUMBER SEQUENCE GAME
+================================= */
+
+.sequence-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.sequence-stat-card {
+    background: white;
+    padding: 22px 28px;
+    border-radius: 18px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.sequence-stat-card span {
+    color: #64748b;
+}
+
+.sequence-stat-card strong {
+    font-size: 28px;
+}
+
+
+/* GAME AREA */
+
+.sequence-game-container {
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+#gameInstruction {
+    font-size: 17px;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+
+/* SEQUENCE DISPLAY */
+
+.sequence-display {
+    max-width: 650px;
+
+    margin: auto;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    background: #f5f3ff;
+
+    color: #6c5ce7;
+
+    font-size: 42px;
+
+    font-weight: 700;
+
+    letter-spacing: 8px;
+
+    min-height: 60px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+/* NUMBER BUTTONS */
+
+.number-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    max-width: 500px;
+
+    margin: auto;
+}
+
+.number-buttons button {
+    border: none;
+
+    background: #f5f3ff;
+
+    color: #5b4cc4;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    padding: 22px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.number-buttons button:hover {
+    background: #6c5ce7;
+
+    color: white;
+
+    transform: translateY(-3px);
+}
+
+
+/* PLAYER ANSWER */
+
+.player-answer {
+    margin-top: 30px;
+}
+
+.player-answer p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.user-sequence {
+    font-size: 26px;
+
+    font-weight: 700;
+
+    color: #2d3748;
+
+    min-height: 40px;
+}
+
+
+/* BUTTONS */
+
+.sequence-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.start-sequence-btn,
+.clear-sequence-btn {
+    border: none;
+
+    padding: 14px 25px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.start-sequence-btn {
+    background: #6c5ce7;
+
+    color: white;
+}
+
+.clear-sequence-btn {
+    background: #f1f1f5;
+
+    color: #475569;
+}
+
+.start-sequence-btn:hover {
+    background: #5946d8;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .sequence-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .sequence-game-container {
+        padding: 25px;
+    }
+
+    .sequence-display {
+        font-size: 30px;
+    }
+
+}
+
+/* =================================
+   PATTERN RECOGNITION GAME
+================================= */
+
+.pattern-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.pattern-stat-card {
+    background: white;
+    padding: 22px 28px;
+    border-radius: 18px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.pattern-stat-card span {
+    color: #64748b;
+}
+
+.pattern-stat-card strong {
+    font-size: 28px;
+    color: #2d3748;
+}
+
+
+/* GAME AREA */
+
+.pattern-game-container {
+    background: white;
+    padding: 40px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+#patternInstruction {
+    font-size: 17px;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+
+/* PATTERN DISPLAY */
+
+.pattern-display {
+    background: #f5f3ff;
+
+    padding: 35px 20px;
+
+    border-radius: 18px;
+
+    font-size: 42px;
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 30px;
+
+    letter-spacing: 8px;
+}
+
+
+/* OPTIONS */
+
+.pattern-options {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.pattern-option {
+    width: 110px;
+    height: 110px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #f5f3ff;
+
+    font-size: 42px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.pattern-option:hover {
+    background: #6c5ce7;
+
+    transform: translateY(-5px);
+}
+
+
+/* START BUTTON */
+
+.start-pattern-btn {
+    border: none;
+
+    padding: 14px 28px;
+
+    background: #6c5ce7;
+
+    color: white;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.start-pattern-btn:hover {
+    background: #5946d8;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .pattern-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .pattern-game-container {
+        padding: 25px;
+    }
+
+    .pattern-display {
+        font-size: 28px;
+        letter-spacing: 4px;
+    }
+
+    .pattern-option {
+        width: 80px;
+        height: 80px;
+
+        font-size: 32px;
+    }
+}
+/* =================================
+   DAILY ROUTINE CHALLENGE
+================================= */
+
+.routine-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.routine-stat-card {
+    background: white;
+    padding: 22px 28px;
+    border-radius: 18px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.routine-stat-card span {
+    color: #64748b;
+}
+
+.routine-stat-card strong {
+    font-size: 28px;
+}
+
+
+/* GAME CONTAINER */
+
+.routine-game-container {
+    background: white;
+    padding: 40px;
+    border-radius: 22px;
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+#routineInstruction {
+    font-size: 17px;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+
+/* ROUTINE ACTIVITIES */
+
+.routine-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+
+    max-width: 750px;
+    margin: auto;
+}
+
+.routine-item {
+    background: #f8f7ff;
+    border: 1px solid #eceaf8;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    transition: 0.2s;
+}
+
+.routine-item:hover {
+    transform: translateY(-3px);
+    border-color: #6c5ce7;
+}
+
+.routine-item.selected {
+    background: #e8fff3;
+    border-color: #8ce3b5;
+}
+
+.routine-item:disabled {
+    cursor: default;
+}
+
+.routine-icon {
+    font-size: 28px;
+}
+
+
+/* SELECTED ROUTINE */
+
+.selected-order {
+    max-width: 750px;
+    margin: 35px auto 0;
+
+    background: #f8fafc;
+    padding: 25px;
+
+    border-radius: 18px;
+
+    text-align: left;
+}
+
+.selected-order h3 {
+    margin-bottom: 15px;
+}
+
+.selected-routine {
+    color: #64748b;
+}
+
+.selected-routine-item {
+    background: white;
+
+    padding: 13px 18px;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    font-weight: 500;
+}
+
+.selected-routine-item span {
+    display: inline-flex;
+
+    width: 28px;
+    height: 28px;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #6c5ce7;
+
+    color: white;
+
+    border-radius: 50%;
+
+    margin-right: 10px;
+
+    font-size: 13px;
+}
+
+
+/* BUTTONS */
+
+.routine-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.start-routine-btn,
+.clear-routine-btn {
+    border: none;
+
+    padding: 14px 25px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.start-routine-btn {
+    background: #6c5ce7;
+    color: white;
+}
+
+.clear-routine-btn {
+    background: #f1f1f5;
+    color: #475569;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .routine-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .routine-items {
+        grid-template-columns: 1fr;
+    }
+
+    .routine-game-container {
+        padding: 25px;
+    }
+
+}
+/* =========================================
+   MEMORY JOURNEY PAGE
+========================================= */
+
+.memory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.memory-header h1 {
+    margin: 6px 0;
+    font-size: 32px;
+}
+
+.memory-header p {
+    color: #64748b;
+    font-size: 16px;
+}
+
+
+/* ADD MEMORY BUTTON */
+
+.add-memory-btn {
+    background: #6c5ce7;
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    padding: 14px 22px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.add-memory-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   MEMORY SUMMARY
+========================================= */
+
+.memory-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.memory-summary-card {
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.summary-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 15px;
+
+    font-size: 26px;
+}
+
+.memory-summary-card span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+.memory-summary-card strong {
+    font-size: 24px;
+
+    color: #1e293b;
+}
+
+
+/* =========================================
+   MEMORY TIMELINE
+========================================= */
+
+.memory-section {
+    margin-bottom: 35px;
+}
+
+.memory-section .section-title {
+    margin-bottom: 25px;
+}
+
+.memory-section .section-title h2 {
+    margin-bottom: 5px;
+}
+
+.memory-section .section-title p {
+    color: #64748b;
+}
+
+
+/* Timeline */
+
+.memory-timeline {
+    position: relative;
+
+    padding-left: 40px;
+}
+
+.memory-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 15px;
+    bottom: 15px;
+
+    width: 3px;
+
+    background: #e5e7eb;
+
+    border-radius: 10px;
+}
+
+
+.timeline-memory {
+    position: relative;
+
+    margin-bottom: 25px;
+}
+
+
+.timeline-dot {
+    position: absolute;
+
+    left: -40px;
+
+    width: 36px;
+    height: 36px;
+
+    background: white;
+
+    border: 3px solid #6c5ce7;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+
+    z-index: 2;
+}
+
+
+.timeline-card {
+    background: white;
+
+    padding: 22px 25px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+
+    transition: 0.2s;
+}
+
+.timeline-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+
+.timeline-year {
+    color: #6c5ce7;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+
+.timeline-card h3 {
+    font-size: 20px;
+
+    margin-bottom: 8px;
+
+    color: #1e293b;
+}
+
+.timeline-card p {
+    color: #64748b;
+
+    line-height: 1.6;
+
+    margin-bottom: 15px;
+}
+
+
+/* MEMORY TAGS */
+
+.memory-tags {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.memory-tags span {
+    background: #f5f3ff;
+
+    color: #6c5ce7;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================
+   MEMORY PROMPT
+========================================= */
+
+.memory-prompt-card {
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf6);
+
+    color: white;
+
+    padding: 30px;
+
+    border-radius: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.prompt-icon {
+    font-size: 42px;
+}
+
+.memory-prompt-card h2 {
+    font-size: 21px;
+
+    margin-bottom: 7px;
+}
+
+.memory-prompt-card p {
+    opacity: 0.9;
+}
+
+
+.remember-btn {
+    margin-left: auto;
+
+    background: white;
+
+    color: #6c5ce7;
+
+    border: none;
+
+    padding: 13px 20px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+.remember-btn:hover {
+    transform: scale(1.04);
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 900px) {
+
+    .memory-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-prompt-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .remember-btn {
+        margin-left: 0;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .memory-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .memory-header h1 {
+        font-size: 26px;
+    }
+
+    .add-memory-btn {
+        width: 100%;
+    }
+
+    .memory-timeline {
+        padding-left: 30px;
+    }
+
+    .timeline-dot {
+        left: -30px;
+
+        width: 30px;
+        height: 30px;
+
+        font-size: 14px;
+    }
+
+    .memory-timeline::before {
+        left: 13px;
+    }
+
+}
+
+/* =========================================
+   MY MEDICINES PAGE
+========================================= */
+
+.medicine-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.medicine-header h1 {
+    font-size: 32px;
+    margin: 6px 0;
+}
+
+.medicine-header p {
+    color: #64748b;
+}
+
+
+/* ADD MEDICINE BUTTON */
+
+.add-medicine-btn {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+
+    padding: 14px 22px;
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.add-medicine-btn:hover {
+    transform: translateY(-2px);
+    background: #5946d8;
+}
+
+
+/* =========================================
+   SUMMARY CARDS
+========================================= */
+
+.medicine-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.medicine-summary-card {
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.medicine-summary-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 15px;
+
+    font-size: 26px;
+}
+
+.medicine-summary-card span {
+    display: block;
+
+    color: #64748b;
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+.medicine-summary-card strong {
+    font-size: 23px;
+    color: #1e293b;
+}
+
+
+/* =========================================
+   MEDICINE SCHEDULE
+========================================= */
+
+.medicine-schedule-section {
+    margin-bottom: 30px;
+}
+
+.medicine-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.medicine-section-heading h2 {
+    margin-bottom: 5px;
+}
+
+.medicine-section-heading p {
+    color: #64748b;
+}
+
+
+.today-badge {
+    background: #f3f0ff;
+    color: #6c5ce7;
+
+    padding: 7px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* MEDICINE LIST */
+
+.medicine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.medicine-card {
+    background: white;
+
+    padding: 20px 25px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+
+    transition: 0.2s;
+}
+
+.medicine-card:hover {
+    transform: translateY(-2px);
+}
+
+
+/* TIME */
+
+.medicine-time {
+    min-width: 60px;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+.medicine-time span {
+    display: block;
+
+    font-size: 12px;
+
+    color: #64748b;
+
+    margin-top: 2px;
+}
+
+
+/* ICON */
+
+.medicine-icon-box {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 15px;
+
+    font-size: 25px;
+}
+
+
+/* MEDICINE INFO */
+
+.medicine-info {
+    flex: 1;
+}
+
+.medicine-info h3 {
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+.medicine-info p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* STATUS */
+
+.medicine-status {
+    padding: 9px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.medicine-status.taken {
+    background: #e8fff3;
+    color: #16a34a;
+}
+
+
+/* TAKE MEDICINE BUTTON */
+
+.take-medicine-btn {
+    border: none;
+
+    background: #6c5ce7;
+    color: white;
+
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.take-medicine-btn:hover {
+    background: #5946d8;
+}
+
+
+/* =========================================
+   MEDICINE REMINDER
+========================================= */
+
+.medicine-reminder-card {
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf6);
+
+    color: white;
+
+    padding: 30px;
+
+    border-radius: 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.reminder-large-icon {
+    font-size: 42px;
+}
+
+.medicine-reminder-card h2 {
+    margin: 5px 0 8px;
+}
+
+.medicine-reminder-card p {
+    opacity: 0.92;
+}
+
+
+.reminder-action-btn {
+    margin-left: auto;
+
+    border: none;
+
+    background: white;
+    color: #6c5ce7;
+
+    padding: 13px 20px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   HEALTH TIP
+========================================= */
+
+.health-tip-card {
+    background: #fffdf3;
+
+    border: 1px solid #f5e9b5;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+.health-tip-icon {
+    font-size: 32px;
+}
+
+.health-tip-card h3 {
+    margin-bottom: 5px;
+}
+
+.health-tip-card p {
+    color: #64748b;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .medicine-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .medicine-reminder-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reminder-action-btn {
+        margin-left: 0;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .medicine-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .add-medicine-btn {
+        width: 100%;
+    }
+
+    .medicine-card {
+        flex-wrap: wrap;
+    }
+
+    .medicine-info {
+        min-width: 150px;
+    }
+
+    .take-medicine-btn {
+        width: 100%;
+    }
+
+}
+
+/* =========================================
+   AI COMPANION PAGE
+========================================= */
+
+.companion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.companion-header h1 {
+    font-size: 32px;
+    margin: 6px 0;
+}
+
+.companion-header p {
+    color: #64748b;
+}
+
+
+/* ONLINE STATUS */
+
+.companion-status {
+    background: #ecfdf5;
+    color: #16a34a;
+
+    padding: 10px 16px;
+    border-radius: 25px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.companion-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 25px;
+
+    margin-bottom: 35px;
+}
+
+
+/* AI PROFILE CARD */
+
+.companion-profile-card {
+    background: white;
+
+    border-radius: 22px;
+    padding: 30px 25px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.ai-avatar {
+    width: 90px;
+    height: 90px;
+
+    margin: auto auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf6);
+
+    border-radius: 28px;
+
+    font-size: 45px;
+}
+
+.companion-profile-card h2 {
+    margin-bottom: 8px;
+}
+
+.companion-profile-card > p {
+    color: #64748b;
+    line-height: 1.5;
+}
+
+
+/* AI STATUS */
+
+.ai-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin: 18px 0;
+
+    padding: 8px 14px;
+
+    background: #ecfdf5;
+    color: #16a34a;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.ai-status span {
+    width: 8px;
+    height: 8px;
+
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+
+/* AI FEATURES */
+
+.companion-features {
+    border-top: 1px solid #eef0f4;
+
+    padding-top: 18px;
+
+    text-align: left;
+}
+
+.companion-features div {
+    padding: 12px 0;
+
+    color: #475569;
+    font-size: 14px;
+}
+
+.companion-features span {
+    margin-right: 8px;
+}
+
+
+/* =========================================
+   CHAT
+========================================= */
+
+.chat-container {
+    background: white;
+
+    border-radius: 22px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 520px;
+}
+
+
+/* CHAT HEADER */
+
+.chat-header {
+    padding: 22px 25px;
+
+    border-bottom: 1px solid #eef0f4;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h3 {
+    margin-bottom: 5px;
+}
+
+.chat-header p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.chat-header > span {
+    font-size: 25px;
+}
+
+
+/* MESSAGES */
+
+.chat-messages {
+    flex: 1;
+
+    padding: 25px;
+
+    overflow-y: auto;
+}
+
+.chat-message {
+    display: flex;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+
+    max-width: 80%;
+}
+
+.message-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 12px;
+
+    flex-shrink: 0;
+}
+
+.message-content {
+    background: #f7f7fb;
+
+    padding: 14px 17px;
+
+    border-radius: 5px 16px 16px 16px;
+
+    line-height: 1.5;
+
+    color: #334155;
+}
+
+
+/* USER MESSAGE - for JavaScript later */
+
+.user-message {
+    margin-left: auto;
+
+    flex-direction: row-reverse;
+}
+
+.user-message .message-avatar {
+    background: #6c5ce7;
+}
+
+.user-message .message-content {
+    background: #6c5ce7;
+    color: white;
+
+    border-radius: 16px 5px 16px 16px;
+}
+
+
+/* =========================================
+   SUGGESTED QUESTIONS
+========================================= */
+
+.suggested-questions {
+    padding: 0 25px 15px;
+
+    display: flex;
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.suggested-questions button {
+    border: 1px solid #e5e7eb;
+
+    background: white;
+
+    padding: 9px 13px;
+
+    border-radius: 20px;
+
+    color: #475569;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.suggested-questions button:hover {
+    background: #f3f0ff;
+    border-color: #6c5ce7;
+}
+
+
+/* =========================================
+   INPUT AREA
+========================================= */
+
+.chat-input-area {
+    padding: 18px 25px;
+
+    border-top: 1px solid #eef0f4;
+
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-area input {
+    flex: 1;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 13px 15px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+.chat-input-area input:focus {
+    border-color: #6c5ce7;
+}
+
+
+.voice-button,
+.send-button {
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.voice-button {
+    width: 48px;
+
+    background: #f3f0ff;
+
+    font-size: 19px;
+}
+
+.send-button {
+    padding: 0 20px;
+
+    background: #6c5ce7;
+    color: white;
+}
+
+
+/* =========================================
+   QUICK HELP
+========================================= */
+
+.companion-quick-help {
+    margin-top: 20px;
+}
+
+.quick-help-title {
+    margin-bottom: 20px;
+}
+
+.quick-help-title p {
+    color: #64748b;
+    margin-top: 5px;
+}
+
+.quick-help-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.quick-help-grid button {
+    background: white;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+
+    transition: 0.2s;
+}
+
+.quick-help-grid button:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.quick-help-grid span {
+    display: block;
+
+    font-size: 28px;
+
+    margin-bottom: 14px;
+}
+
+.quick-help-grid strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #1e293b;
+}
+
+.quick-help-grid small {
+    color: #64748b;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .companion-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-help-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .companion-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .companion-header h1 {
+        font-size: 26px;
+    }
+
+    .quick-help-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-message {
+        max-width: 95%;
+    }
+
+    .chat-input-area {
+        padding: 15px;
+    }
+
+    .send-button {
+        padding: 0 13px;
+    }
+
+}
+/* =========================================
+   CAREGIVER DASHBOARD
+========================================= */
+
+.caregiver-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.caregiver-header h1 {
+    font-size: 32px;
+    margin: 6px 0;
+}
+
+.caregiver-header p {
+    color: #64748b;
+}
+
+
+/* REPORT BUTTON */
+
+.caregiver-report-btn {
+    border: none;
+    background: #6c5ce7;
+    color: white;
+
+    padding: 13px 20px;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.caregiver-report-btn:hover {
+    background: #5946d8;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   PATIENT OVERVIEW
+========================================= */
+
+.patient-overview-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.patient-avatar-large {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 22px;
+
+    font-size: 38px;
+}
+
+.patient-overview-info {
+    flex: 1;
+}
+
+.patient-overview-info h2 {
+    margin: 5px 0 8px;
+}
+
+.patient-overview-info > p:last-child {
+    color: #64748b;
+}
+
+
+/* PATIENT STATUS */
+
+.patient-status {
+    background: #ecfdf5;
+    color: #16a34a;
+
+    padding: 10px 15px;
+
+    border-radius: 25px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================
+   CAREGIVER STATS
+========================================= */
+
+.caregiver-stats-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+.caregiver-stat-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+
+    transition: 0.2s;
+}
+
+.caregiver-stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.caregiver-stat-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 15px;
+
+    font-size: 24px;
+}
+
+.caregiver-stat-card span {
+    display: block;
+
+    font-size: 13px;
+
+    color: #64748b;
+
+    margin-bottom: 5px;
+}
+
+.caregiver-stat-card strong {
+    display: block;
+
+    font-size: 21px;
+
+    color: #1e293b;
+}
+
+.caregiver-stat-card small {
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   PERFORMANCE SECTION
+========================================= */
+
+.performance-section {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    margin-bottom: 30px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.performance-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.performance-heading h2 {
+    margin-bottom: 5px;
+}
+
+.performance-heading p {
+    color: #64748b;
+}
+
+.performance-period {
+    background: #f3f0ff;
+
+    color: #6c5ce7;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* PERFORMANCE GRID */
+
+.performance-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.performance-card {
+    background: #f8fafc;
+
+    padding: 18px;
+
+    border-radius: 15px;
+}
+
+.performance-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+.performance-top span {
+    color: #475569;
+
+    font-size: 14px;
+}
+
+.performance-top strong {
+    color: #1e293b;
+}
+
+
+/* PROGRESS BAR */
+
+.progress-bar {
+    height: 9px;
+
+    background: #e5e7eb;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background: #6c5ce7;
+
+    border-radius: 20px;
+}
+
+
+/* =========================================
+   BOTTOM GRID
+========================================= */
+
+.caregiver-bottom-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+
+/* ACTIVITY CARD */
+
+.activity-overview-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.card-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.card-heading span {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+.activity-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #eef0f4;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-check {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-weight: bold;
+}
+
+.activity-item.completed .activity-check {
+    background: #ecfdf5;
+
+    color: #16a34a;
+}
+
+.activity-item.pending .activity-check {
+    background: #fff7ed;
+
+    color: #ea580c;
+}
+
+.activity-item strong {
+    display: block;
+
+    margin-bottom: 3px;
+}
+
+.activity-item p {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   AI OBSERVATION
+========================================= */
+
+.ai-observation-card {
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf6);
+
+    color: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: flex-start;
+}
+
+.ai-observation-icon {
+    font-size: 35px;
+}
+
+.ai-observation-card h2 {
+    margin: 6px 0 12px;
+}
+
+.ai-observation-card > div:last-child > p {
+    line-height: 1.6;
+}
+
+.observation-note {
+    margin-top: 15px;
+
+    font-size: 12px;
+
+    opacity: 0.8;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .caregiver-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .caregiver-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .caregiver-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+    .caregiver-header h1 {
+        font-size: 26px;
+    }
+
+    .patient-overview-card {
+        flex-wrap: wrap;
+    }
+
+    .patient-status {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .caregiver-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .performance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .performance-heading {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+}
+
+/* =========================================
+   PROFILE PAGE
+========================================= */
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-header h1 {
+    font-size: 32px;
+    margin: 6px 0;
+}
+
+.profile-header p {
+    color: #64748b;
+}
+
+
+/* EDIT PROFILE BUTTON */
+
+.edit-profile-btn {
+    border: none;
+    background: #6c5ce7;
+    color: white;
+
+    padding: 13px 20px;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.edit-profile-btn:hover {
+    background: #5946d8;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   PROFILE HERO
+========================================= */
+
+.profile-hero-card {
+    background: white;
+
+    padding: 28px;
+    border-radius: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.profile-avatar-large {
+    width: 85px;
+    height: 85px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf6);
+
+    border-radius: 25px;
+
+    font-size: 40px;
+}
+
+.profile-main-info {
+    flex: 1;
+}
+
+.profile-main-info h2 {
+    margin-bottom: 5px;
+}
+
+.profile-role {
+    color: #6c5ce7;
+    font-weight: 600;
+
+    margin-bottom: 10px;
+}
+
+.profile-description {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* PROFILE STATUS */
+
+.profile-status {
+    background: #ecfdf5;
+    color: #16a34a;
+
+    padding: 10px 15px;
+    border-radius: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   PROFILE CONTENT GRID
+========================================= */
+
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+
+/* PROFILE INFORMATION CARD */
+
+.profile-info-card {
+    background: white;
+
+    padding: 25px;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.profile-card-heading h2 {
+    margin-top: 5px;
+}
+
+.profile-card-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 15px;
+
+    font-size: 24px;
+}
+
+
+/* PROFILE DETAILS */
+
+.profile-details-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+.profile-detail {
+    background: #f8fafc;
+
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.profile-detail span {
+    display: block;
+
+    color: #64748b;
+    font-size: 13px;
+
+    margin-bottom: 7px;
+}
+
+.profile-detail strong {
+    color: #1e293b;
+    font-size: 15px;
+}
+
+
+/* =========================================
+   PREFERENCES
+========================================= */
+
+.preference-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.preference-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid #eef0f4;
+}
+
+.preference-item:last-child {
+    border-bottom: none;
+}
+
+.preference-item strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.preference-item p {
+    color: #64748b;
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.preference-status {
+    background: #ecfdf5;
+    color: #16a34a;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   CARE & ACCOUNT
+========================================= */
+
+.profile-care-section {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+.profile-care-card {
+    background: white;
+
+    padding: 25px;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.profile-care-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f0ff;
+
+    border-radius: 16px;
+
+    font-size: 27px;
+
+    flex-shrink: 0;
+}
+
+.profile-care-card > div:nth-child(2) {
+    flex: 1;
+}
+
+.profile-care-card h3 {
+    margin-bottom: 6px;
+}
+
+.profile-care-card p {
+    color: #64748b;
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* BUTTONS */
+
+.connect-caregiver-btn,
+.manage-privacy-btn {
+    border: none;
+
+    background: #f3f0ff;
+    color: #6c5ce7;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+.connect-caregiver-btn:hover,
+.manage-privacy-btn:hover {
+    background: #6c5ce7;
+    color: white;
+}
+
+
+/* =========================================
+   PROFILE TIP
+========================================= */
+
+.profile-tip-card {
+    background: #fffdf3;
+
+    border: 1px solid #f5e9b5;
+
+    padding: 22px;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+.profile-tip-icon {
+    font-size: 32px;
+}
+
+.profile-tip-card h3 {
+    margin-bottom: 5px;
+}
+
+.profile-tip-card p {
+    color: #64748b;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .profile-content-grid,
+    .profile-care-section {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+    .profile-header h1 {
+        font-size: 26px;
+    }
+
+    .profile-hero-card {
+        flex-wrap: wrap;
+    }
+
+    .profile-status {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .profile-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-care-card {
+        flex-wrap: wrap;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .edit-profile-btn {
+        width: 100%;
+    }
+
+    .preference-item {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+}
+
+/* =========================================
+   COLLAPSIBLE SIDEBAR
+========================================= */
+
+.sidebar {
+    transition: width 0.3s ease;
+}
+
+.menu-text,
+.logo-text,
+.menu-title,
+.help-card {
+    transition: opacity 0.2s ease;
+}
+
+
+body.sidebar-collapsed .sidebar {
+    width: 85px;
+}
+
+
+body.sidebar-collapsed .logo-text,
+body.sidebar-collapsed .menu-text,
+body.sidebar-collapsed .menu-title,
+body.sidebar-collapsed .help-card {
+    display: none;
+}
+
+
+body.sidebar-collapsed .main-content {
+    margin-left: 85px;
+}
+
+
+.sidebar-toggle {
+    cursor: pointer;
+}
+
+/* DARK MODE */
+
+body.dark-mode {
+    background: #111827;
+    color: white;
+}
+
+body.dark-mode .main-content {
+    background: #111827;
+}
+
+body.dark-mode .settings-card,
+body.dark-mode .profile-info-card,
+body.dark-mode .profile-hero-card,
+body.dark-mode .caregiver-stat-card,
+body.dark-mode .performance-section {
+    background: #1f2937;
+    color: white;
+}
+
+
+/* LARGE TEXT */
+
+body.large-text {
+    font-size: 18px;
+}
+
+body.large-text p {
+    font-size: 1.1em;
+}
+
+/* =========================================
+   SETTINGS PAGE
+========================================= */
+
+.settings-header {
+    margin-bottom: 30px;
+}
+
+.settings-header h1 {
+    font-size: 32px;
+    margin: 6px 0;
+}
+
+.settings-header p {
+    color: #64748b;
+}
+
+
+/* SETTINGS CARD */
+
+.settings-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    margin-bottom: 22px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.settings-card h2 {
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
+
+
+/* SETTINGS ROW */
+
+.setting-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid #eef0f4;
+}
+
+.setting-row:last-child {
+    border-bottom: none;
+}
+
+.setting-row strong {
+    display: block;
+
+    font-size: 15px;
+
+    color: #1e293b;
+
+    margin-bottom: 5px;
+}
+
+.setting-row p {
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   TOGGLE SWITCH
+========================================= */
+
+.switch {
+    position: relative;
+
+    display: inline-block;
+
+    width: 52px;
+
+    height: 28px;
+
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+
+    width: 0;
+
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+
+    cursor: pointer;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: #cbd5e1;
+
+    border-radius: 30px;
+
+    transition: 0.3s;
+}
+
+.slider::before {
+    content: "";
+
+    position: absolute;
+
+    height: 22px;
+
+    width: 22px;
+
+    left: 3px;
+
+    bottom: 3px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    transition: 0.3s;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ACTIVE TOGGLE */
+
+.switch input:checked + .slider {
+    background: #6c5ce7;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(24px);
+}
+
+
+/* =========================================
+   LANGUAGE SELECT
+========================================= */
+
+.language-select {
+    border: 1px solid #e2e8f0;
+
+    background: #f8fafc;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.language-select:focus {
+    border-color: #6c5ce7;
+}
+
+
+/* =========================================
+   SETTINGS ACTION BUTTON
+========================================= */
+
+.settings-action-btn {
+    border: none;
+
+    background: #f3f0ff;
+
+    color: #6c5ce7;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.settings-action-btn:hover {
+    background: #6c5ce7;
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   DANGER / ACCOUNT CARD
+========================================= */
+
+.danger-card {
+    border-left: 4px solid #6c5ce7;
+}
+
+
+/* =========================================
+   SETTINGS RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .settings-header h1 {
+        font-size: 26px;
+    }
+
+    .settings-card {
+        padding: 20px;
+    }
+
+    .setting-row {
+        gap: 20px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .setting-row {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .switch,
+    .language-select,
+    .settings-action-btn {
+        margin-top: 5px;
+    }
+
+}
+
+
+/* =========================================
+   OFFLINE MODE INDICATOR
+========================================= */
+
+body.offline-mode::after {
+    content: "📡 You are offline";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #f59e0b;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 9999;
+}
+
+/* =========================================
+   MODAL OVERLAY
+========================================= */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   ADD FORMS
+========================================= */
+
+.add-form input,
+.add-form select,
+.add-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.add-form input:focus,
+.add-form select:focus,
+.add-form textarea:focus {
+    border-color: #6d5dfc;
+    outline: none;
+}
+
+.add-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #6d5dfc;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-primary:hover {
+    background: #5a4bd1;
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+/* =========================================
+   HYDRATION REMINDER CARD
+========================================= */
+
+.hydration-card {
+    background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+    color: white;
+    padding: 25px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.hydration-card .hydration-icon {
+    font-size: 40px;
+}
+
+.hydration-card h3 {
+    margin-bottom: 5px;
+}
+
+.hydration-card p {
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.hydration-btn {
+    margin-left: auto;
+    background: white;
+    color: #0ea5e9;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* =========================================
+   APPOINTMENT REMINDER CARD
+========================================= */
+
+.appointment-card {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: white;
+    padding: 25px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.appointment-card .appointment-icon {
+    font-size: 40px;
+}
+
+.appointment-card h3 {
+    margin-bottom: 5px;
+}
+
+.appointment-card p {
+    opacity: 0.9;
+    font-size: 14px;
+}

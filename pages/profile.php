@@ -24,7 +24,10 @@ $user = getCurrentUser();
                 <h1>👤 My Profile</h1>
                 <p>Manage your personal information and care preferences.</p>
             </div>
-            <button class="edit-profile-btn" onclick="toggleEditProfile()">✏️ Edit Profile</button>
+            <div style="display:flex;gap:10px;">
+                <button onclick="generateReport()" style="padding:12px 20px;background:#6d5dfc;color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;">📄 Download Report</button>
+                <button class="edit-profile-btn" onclick="toggleEditProfile()">✏️ Edit Profile</button>
+            </div>
         </section>
 
         <section class="profile-hero-card">
@@ -111,5 +114,7 @@ document.getElementById('profileForm').addEventListener('submit', function(e) {
     .then(r=>r.json()).then(d => { if(d.success) location.reload(); });
 });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../assets/js/pdf-report.js"></script>
 </body>
 </html>

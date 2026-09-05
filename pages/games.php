@@ -32,7 +32,10 @@ $games_today = $gstmt->get_result()->fetch_assoc()['cnt'];
                 <h1>Cognitive Games 🧠</h1>
                 <p>Fun activities designed to exercise memory, attention and recognition.</p>
             </div>
-            <div class="medicine-date">🎯 Daily Goal: 3 Activities</div>
+            <div style="display:flex;gap:10px;">
+                <div class="medicine-date">🎯 Daily Goal: 3 Activities</div>
+                <button onclick="generateReport()" style="padding:12px 20px;background:#6d5dfc;color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;">📄 Download Report</button>
+            </div>
         </div>
 
         <section class="game-progress-overview">
@@ -94,5 +97,7 @@ $games_today = $gstmt->get_result()->fetch_assoc()['cnt'];
         </section>
     </main>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../assets/js/pdf-report.js"></script>
 </body>
 </html>

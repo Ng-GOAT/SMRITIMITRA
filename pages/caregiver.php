@@ -44,6 +44,7 @@ $activities = $astmt->get_result();
                 <h1>👨‍👩‍👧 Caregiver Dashboard</h1>
                 <p>Monitor daily activities, medicine adherence and cognitive progress.</p>
             </div>
+            <button onclick="generateCaregiverReport()" style="padding:12px 20px;background:#6d5dfc;color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;">📄 Download Report</button>
         </section>
 
         <section class="patient-overview-card">
@@ -114,5 +115,7 @@ $activities = $astmt->get_result();
         </section>
     </main>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../assets/js/pdf-report.js"></script>
 </body>
 </html>

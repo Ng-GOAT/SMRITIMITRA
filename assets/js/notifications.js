@@ -1,5 +1,7 @@
 let notificationInterval = null;
 let userSettings = {};
+let notifiedReminders = {};
+let notifiedMedicines = {};
 
 function initNotifications() {
     if (!('Notification' in window)) {
@@ -33,7 +35,7 @@ function startReminderChecks() {
         checkReminders();
         checkMedicineReminders();
         checkHydrationReminder();
-    }, 30000);
+    }, 10000);
 }
 
 function checkReminders() {
@@ -46,10 +48,12 @@ function checkReminders() {
             const now = new Date();
             data.reminders.forEach(reminder => {
                 if (reminder.is_completed) return;
+                if (notifiedReminders[reminder.id]) return;
                 const rTime = new Date(reminder.reminder_time);
                 const diff = (rTime - now) / 60000;
-                if (diff > 0 && diff <= 5) {
+                if (diff >= -2 && diff <= 5) {
                     showNotification(reminder);
+                    notifiedReminders[reminder.id] = Date.now();
                 }
             });
         })
@@ -60,19 +64,15 @@ function checkMedicineReminders() {
     if (Notification.permission !== 'granted') return;
     if (userSettings.medicine_reminders === '0') return;
 
-    const today = new Date().toDateString();
-    const lastMedCheck = localStorage.getItem('lastMedCheck');
-    if (lastMedCheck === today) return;
-
     fetch('/SmritiMitra/api/medicines.php?action=get_medicines')
         .then(r => r.json())
         .then(data => {
             if (!data.medicines || data.medicines.length === 0) return;
             const now = new Date();
-            let shown = false;
+            const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
             data.medicines.forEach(med => {
-                if (med.status === 'taken' || shown) return;
+                if (med.status === 'taken') return;
 
                 let h = parseInt(med.time_hour);
                 let m = parseInt(med.time_minute);
@@ -81,19 +81,17 @@ function checkMedicineReminders() {
                 if (period === 'PM' && h < 12) h += 12;
                 if (period === 'AM' && h === 12) h = 0;
 
-                const medTime = new Date();
-                medTime.setHours(h, m, 0, 0);
-                const diff = (medTime - now) / 60000;
+                const medMinutes = h * 60 + m;
+                const diff = medMinutes - nowMinutes;
 
-                if (diff >= -30 && diff <= 15) {
-                    showMedicineNotification(med);
-                    shown = true;
+                if (diff >= -15 && diff <= 15) {
+                    const key = med.id + '_' + now.toDateString();
+                    if (!notifiedMedicines[key]) {
+                        showMedicineNotification(med);
+                        notifiedMedicines[key] = Date.now();
+                    }
                 }
             });
-
-            if (shown) {
-                localStorage.setItem('lastMedCheck', today);
-            }
         })
         .catch(() => {});
 }
@@ -130,8 +128,8 @@ function checkHydrationReminder() {
 
 function showNotification(reminder) {
     if (Notification.permission !== 'granted') return;
-    const icons = { medicine: '💊', hydration: '💧', activity: '🎮', appointment: '🏥' };
-    const notif = new Notification(`${icons[reminder.reminder_type] || '🔔'} ${reminder.title}`, {
+    const icons = { medicine: 'Medicine', hydration: 'Water', activity: 'Activity', appointment: 'Appointment' };
+    const notif = new Notification(`${icons[reminder.reminder_type] || 'Reminder'}: ${reminder.title}`, {
         body: `Scheduled for ${new Date(reminder.reminder_time).toLocaleTimeString()}`,
         icon: '/SmritiMitra/assets/icon-192.png',
         requireInteraction: true
@@ -165,11 +163,8 @@ function checkNotifications() {
 function testNotification() {
     if (Notification.permission !== 'granted') {
         Notification.requestPermission().then(perm => {
-            if (perm === 'granted') {
-                sendTestNotification();
-            } else {
-                alert('Please allow notifications in your browser!');
-            }
+            if (perm === 'granted') sendTestNotification();
+            else alert('Please allow notifications in your browser!');
         });
     } else {
         sendTestNotification();
@@ -194,12 +189,11 @@ function testMedicineReminder() {
 }
 
 function showMedicineReminderTest() {
-    const notif = new Notification('Medicine Reminder', {
+    new Notification('Medicine Reminder', {
         body: 'Time to take your evening medicine!',
         icon: '/SmritiMitra/assets/icon-192.png',
         requireInteraction: true
-    });
-    notif.onclick = function() {
+    }).onclick = function() {
         window.focus();
         window.location.href = '/SmritiMitra/pages/medicines.php';
     };
@@ -216,12 +210,11 @@ function testHydrationReminder() {
 }
 
 function showHydrationReminderTest() {
-    const notif = new Notification('Hydration Reminder', {
+    new Notification('Hydration Reminder', {
         body: 'Time to drink some water! Stay hydrated.',
         icon: '/SmritiMitra/assets/icon-192.png',
         requireInteraction: true
-    });
-    notif.onclick = function() { window.focus(); };
+    }).onclick = function() { window.focus(); };
     localStorage.setItem('lastHydration', Date.now().toString());
 }
 

@@ -58,3 +58,4 @@
     <button class="sidebar-toggle" id="sidebarToggle">☰</button>
 </div>
 <script src="/SmritiMitra/assets/js/sidebar.js"></script>
+<script src="/SmritiMitra/assets/js/notifications.js"></script>

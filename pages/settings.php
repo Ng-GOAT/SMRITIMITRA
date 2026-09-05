@@ -120,7 +120,6 @@ if (!$settings) {
     </main>
 </div>
 
-<script src="../assets/js/notifications.js"></script>
 <script>
 function saveSetting(field, value) {
     const data = new URLSearchParams({ action: 'update_settings' });

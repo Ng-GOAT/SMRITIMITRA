@@ -47,22 +47,20 @@ $activities = $astmt->get_result();
             <button onclick="generateCaregiverReport()" style="padding:12px 20px;background:#6d5dfc;color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;">&#x1F4C4; Download Report</button>
         </section>
 
-        <section class="link-caregiver-section">
-            <div class="link-caregiver-card">
-                <div class="link-caregiver-icon">&#x1F517;</div>
-                <div class="link-caregiver-info">
-                    <h3>Link with Caregiver</h3>
-                    <p>Enter your caregiver's email to connect. They will be able to monitor your progress.</p>
-                </div>
-                <form id="linkCaregiverForm" class="link-caregiver-form">
-                    <input type="email" id="caregiverEmail" placeholder="Caregiver's email address" required>
-                    <button type="submit">Link</button>
+        <section style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:30px;">
+            <div style="background:linear-gradient(135deg,#f0f0ff,#e8e8ff);border:2px solid #c7d2fe;border-radius:18px;padding:24px;">
+                <div style="font-size:36px;margin-bottom:10px;">&#x1F517;</div>
+                <h3 style="font-size:18px;margin-bottom:5px;">Link with Caregiver</h3>
+                <p style="font-size:13px;color:#64748b;margin-bottom:15px;">Enter your caregiver's email to connect. They will be able to monitor your progress.</p>
+                <form id="linkCaregiverForm" style="display:flex;gap:10px;">
+                    <input type="email" id="caregiverEmail" placeholder="Caregiver's email address" required style="flex:1;padding:12px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;">
+                    <button type="submit" style="padding:12px 24px;background:#6d5dfc;color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;">Link</button>
                 </form>
-                <div id="linkStatus" class="link-status"></div>
+                <div id="linkStatus" style="margin-top:10px;font-size:13px;font-weight:600;"></div>
             </div>
 
-            <div class="linked-caregivers-card">
-                <h3>&#x1F465; Linked Caregivers</h3>
+            <div style="background:white;border-radius:18px;padding:24px;box-shadow:0 5px 20px rgba(0,0,0,0.04);">
+                <h3 style="font-size:18px;margin-bottom:15px;">&#x1F465; Linked Caregivers</h3>
                 <div id="linkedCaregiversList">
                     <p style="color:#64748b;">Loading...</p>
                 </div>

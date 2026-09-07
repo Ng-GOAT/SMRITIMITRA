@@ -41,10 +41,32 @@ $activities = $astmt->get_result();
         <section class="caregiver-header">
             <div>
                 <p class="section-tag">CARE & PROGRESS MONITORING</p>
-                <h1>👨‍👩‍👧 Caregiver Dashboard</h1>
+                <h1>&#x1F468;&#x200D;&#x1F469;&#x200D;&#x1F467; Caregiver Dashboard</h1>
                 <p>Monitor daily activities, medicine adherence and cognitive progress.</p>
             </div>
-            <button onclick="generateCaregiverReport()" style="padding:12px 20px;background:#6d5dfc;color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;">📄 Download Report</button>
+            <button onclick="generateCaregiverReport()" style="padding:12px 20px;background:#6d5dfc;color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;">&#x1F4C4; Download Report</button>
+        </section>
+
+        <section class="link-caregiver-section">
+            <div class="link-caregiver-card">
+                <div class="link-caregiver-icon">&#x1F517;</div>
+                <div class="link-caregiver-info">
+                    <h3>Link with Caregiver</h3>
+                    <p>Enter your caregiver's email to connect. They will be able to monitor your progress.</p>
+                </div>
+                <form id="linkCaregiverForm" class="link-caregiver-form">
+                    <input type="email" id="caregiverEmail" placeholder="Caregiver's email address" required>
+                    <button type="submit">Link</button>
+                </form>
+                <div id="linkStatus" class="link-status"></div>
+            </div>
+
+            <div class="linked-caregivers-card">
+                <h3>&#x1F465; Linked Caregivers</h3>
+                <div id="linkedCaregiversList">
+                    <p style="color:#64748b;">Loading...</p>
+                </div>
+            </div>
         </section>
 
         <section class="patient-overview-card">
@@ -117,5 +139,74 @@ $activities = $astmt->get_result();
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="../assets/js/pdf-report.js"></script>
+<script>
+document.getElementById('linkCaregiverForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('caregiverEmail').value;
+    var status = document.getElementById('linkStatus');
+    status.textContent = 'Linking...';
+    status.style.color = '#64748b';
+
+    fetch('/SmritiMitra/api/caregiver.php', {
+        method: 'POST',
+        body: new URLSearchParams({ action: 'link_caregiver', caregiver_email: email })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            status.textContent = 'Linked with ' + data.caregiver_name + '!';
+            status.style.color = '#22c55e';
+            document.getElementById('caregiverEmail').value = '';
+            loadLinkedCaregivers();
+        } else {
+            status.textContent = data.error || 'Failed to link';
+            status.style.color = '#dc2626';
+        }
+    })
+    .catch(function() {
+        status.textContent = 'Error. Please try again.';
+        status.style.color = '#dc2626';
+    });
+});
+
+function loadLinkedCaregivers() {
+    fetch('/SmritiMitra/api/caregiver.php?action=get_links')
+    .then(r => r.json())
+    .then(data => {
+        var list = document.getElementById('linkedCaregiversList');
+        var links = data.caregivers || [];
+        if (links.length === 0) {
+            list.innerHTML = '<p style="color:#64748b;">No caregivers linked yet. Enter their email above.</p>';
+            return;
+        }
+        list.innerHTML = '';
+        links.forEach(function(link) {
+            var name = link.caregiver_name || 'Caregiver';
+            var initial = name.charAt(0).toUpperCase();
+            var item = document.createElement('div');
+            item.className = 'linked-caregiver-item';
+            item.innerHTML = '<div class="caregiver-avatar-sm">' + initial + '</div>' +
+                '<div><strong>' + name + '</strong><p>Linked since ' + new Date(link.linked_at).toLocaleDateString() + '</p></div>' +
+                '<button onclick="unlinkCaregiver(' + link.id + ')" class="unlink-btn">Remove</button>';
+            list.appendChild(item);
+        });
+    })
+    .catch(function() {
+        document.getElementById('linkedCaregiversList').innerHTML = '<p style="color:#dc2626;">Could not load caregivers.</p>';
+    });
+}
+
+function unlinkCaregiver(linkId) {
+    if (!confirm('Remove this caregiver?')) return;
+    fetch('/SmritiMitra/api/caregiver.php', {
+        method: 'POST',
+        body: new URLSearchParams({ action: 'unlink', link_id: linkId })
+    })
+    .then(r => r.json())
+    .then(() => loadLinkedCaregivers());
+}
+
+window.onload = function() { loadLinkedCaregivers(); };
+</script>
 </body>
 </html>

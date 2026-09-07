@@ -89,16 +89,16 @@ function showOnScreenHydrationReminder() {
 }
 
 function showGameReminder() {
-    fetch('/SmritiMitra/api/games.php?action=get_game_stats')
+    fetch('/SmritiMitra/api/games.php?action=get_scores')
         .then(r => r.json())
         .then(data => {
-            const totalGames = (data.recent_scores || []).length;
-            const lastPlayed = totalGames > 0 ? data.recent_scores[0].played_at : null;
+            const scores = data.scores || [];
+            const totalGames = scores.length;
             const now = new Date();
             let hoursSince = 25;
 
-            if (lastPlayed) {
-                const diff = (now - new Date(lastPlayed)) / 3600000;
+            if (totalGames > 0 && scores[0].completed_at) {
+                const diff = (now - new Date(scores[0].completed_at)) / 3600000;
                 hoursSince = diff;
             }
 

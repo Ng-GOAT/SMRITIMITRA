@@ -53,7 +53,7 @@ requireLogin();
 
 
         <!-- GAME STATS -->
-        <div class="game-stats">
+        <div class="game-stats" id="gameStats" style="display:none;">
 
             <div class="game-stat-card">
                 <span>🎯 Moves</span>
@@ -67,19 +67,28 @@ requireLogin();
 
         </div>
 
+        <!-- START SCREEN -->
+        <div id="startScreen" style="text-align:center;padding:60px 20px;">
+            <div style="font-size:80px;margin-bottom:20px;">🧠</div>
+            <h2 style="margin-bottom:10px;">Memory Match</h2>
+            <p style="color:#64748b;margin-bottom:30px;">Find matching pairs to win! Listen for sounds and voice guidance.</p>
+            <button onclick="startGame()" style="padding:18px 50px;background:linear-gradient(135deg,#6d5dfc,#8b5cf6);color:white;border:none;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 8px 25px rgba(109,93,252,0.3);">
+                ▶ Start Game
+            </button>
+        </div>
+
 
         <!-- GAME BOARD -->
-        <div class="memory-game-container">
+        <div class="memory-game-container" id="gameArea" style="display:none;">
 
             <div class="memory-board" id="memoryBoard">
-                <!-- Cards will be created by JavaScript -->
             </div>
 
         </div>
 
 
         <!-- RESTART -->
-        <div class="game-actions">
+        <div class="game-actions" id="gameActions" style="display:none;">
 
             <button class="restart-game-btn" onclick="startGame()">
                 🔄 Restart Game

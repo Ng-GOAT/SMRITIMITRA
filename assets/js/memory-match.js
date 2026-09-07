@@ -1,12 +1,9 @@
 const cardValues = ["🍎","🍎","🐶","🐶","🌸","🌸","🚗","🚗"];
 let cards = [], firstCard = null, secondCard = null, moves = 0, matches = 0, locked = false;
-let gameStartTime = 0, totalAttempts = 0, gameReady = false;
+let gameStartTime = 0, totalAttempts = 0;
 
 function startGame() {
-    if (!gameReady) {
-        unlockAudio();
-        gameReady = true;
-    }
+    unlockAudio();
     stopBackgroundMusic();
     cards = [...cardValues].sort(() => Math.random() - 0.5);
     firstCard = null; secondCard = null; moves = 0; matches = 0; locked = false;
@@ -14,13 +11,13 @@ function startGame() {
     document.getElementById("moves").textContent = moves;
     document.getElementById("matches").textContent = "0 / 4";
     document.getElementById("gameResult").classList.add("hidden");
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("gameStats").style.display = "grid";
+    document.getElementById("gameArea").style.display = "block";
+    document.getElementById("gameActions").style.display = "flex";
     createBoard();
-    if (gameReady) {
-        setTimeout(() => {
-            playStartVoice();
-            setTimeout(() => startBackgroundMusic(), 1500);
-        }, 200);
-    }
+    playStartVoice();
+    setTimeout(() => startBackgroundMusic(), 1500);
 }
 
 function createBoard() {
@@ -32,10 +29,7 @@ function createBoard() {
         card.dataset.value = value;
         card.dataset.index = index;
         card.innerHTML = "❓";
-        card.addEventListener("click", () => {
-            if (!gameReady) { unlockAudio(); gameReady = true; }
-            flipCard(card);
-        });
+        card.addEventListener("click", () => flipCard(card));
         board.appendChild(card);
     });
 }
@@ -89,5 +83,3 @@ function saveGameScore(gameType, score, attempts) {
         body: new URLSearchParams({ action: 'save_score', game_type: gameType, score: Math.max(0, 100 - score * 2), level: 1, difficulty: level, accuracy: accuracy })
     }).catch(() => {});
 }
-
-startGame();

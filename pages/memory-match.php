@@ -42,9 +42,12 @@ requireLogin();
                 </p>
             </div>
 
-            <a href="games.php" class="back-link">
-                ← Back to Games
-            </a>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <a href="games.php" class="back-link">
+                    ← Back to Games
+                </a>
+                <button id="soundToggle" onclick="toggleGameSound()" style="padding:10px 16px;background:#6d5dfc;color:white;border:none;border-radius:10px;font-size:20px;cursor:pointer;">🔊</button>
+            </div>
 
         </section>
 
@@ -103,6 +106,7 @@ requireLogin();
 </div>
 
 
+<script src="../assets/js/audio.js"></script>
 <script src="../assets/js/memory-match.js"></script>
 
 </body>

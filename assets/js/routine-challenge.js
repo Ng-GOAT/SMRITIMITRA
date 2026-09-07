@@ -8,6 +8,7 @@ const routineActivities = [
 let selectedActivities = [], routineScore = 0, routineStarted = false;
 
 function startRoutineGame() {
+    stopBackgroundMusic();
     selectedActivities = []; routineStarted = true;
     document.getElementById("routineInstruction").textContent = "Select the activities in the correct daily order.";
     document.getElementById("selectedRoutine").textContent = "Choose activities in the correct order.";
@@ -22,11 +23,14 @@ function startRoutineGame() {
         button.onclick = () => selectActivity(activity, button);
         routineItems.appendChild(button);
     });
+    playStartVoice();
+    setTimeout(() => startBackgroundMusic(), 1500);
 }
 
 function selectActivity(activity, button) {
     if (!routineStarted) return;
     if (selectedActivities.some(item => item.id === activity.id)) return;
+    playClickSound();
     selectedActivities.push(activity);
     button.classList.add("selected"); button.disabled = true;
     updateSelectedRoutine();
@@ -49,14 +53,20 @@ function clearRoutine() {
 
 function checkRoutine() {
     routineStarted = false;
+    stopBackgroundMusic();
     let correctCount = 0;
     selectedActivities.forEach((activity, index) => { if (activity.order === index + 1) correctCount++; });
     routineScore += correctCount * 10;
     document.getElementById("routineScore").textContent = routineScore;
     const instruction = document.getElementById("routineInstruction");
     if (correctCount === 5) {
+        playWinSound();
+        playWinVoice();
         instruction.textContent = "Excellent! You remembered the complete routine correctly!";
     } else {
+        if (correctCount >= 3) playLevelUpSound();
+        else playWrongSound();
+        playLoseVoice();
         instruction.textContent = `You placed ${correctCount} out of 5 activities correctly. Try again!`;
     }
     const accuracy = Math.round((correctCount / 5) * 100);

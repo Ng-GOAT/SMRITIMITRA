@@ -3,6 +3,7 @@ let cards = [], firstCard = null, secondCard = null, moves = 0, matches = 0, loc
 let gameStartTime = 0, totalAttempts = 0;
 
 function startGame() {
+    stopBackgroundMusic();
     cards = [...cardValues].sort(() => Math.random() - 0.5);
     firstCard = null; secondCard = null; moves = 0; matches = 0; locked = false;
     totalAttempts = 0; gameStartTime = Date.now();
@@ -10,6 +11,8 @@ function startGame() {
     document.getElementById("matches").textContent = "0 / 4";
     document.getElementById("gameResult").classList.add("hidden");
     createBoard();
+    playStartVoice();
+    setTimeout(() => startBackgroundMusic(), 1500);
 }
 
 function createBoard() {
@@ -28,6 +31,7 @@ function createBoard() {
 
 function flipCard(card) {
     if (locked || card.classList.contains("flipped") || card.classList.contains("matched")) return;
+    playFlipSound();
     card.classList.add("flipped");
     card.textContent = card.dataset.value;
     if (firstCard === null) { firstCard = card; }
@@ -38,18 +42,23 @@ function checkMatch() {
     locked = true;
     const isMatch = firstCard.dataset.value === secondCard.dataset.value;
     if (isMatch) {
+        playMatchSound();
         firstCard.classList.add("matched"); secondCard.classList.add("matched");
         matches++;
         document.getElementById("matches").textContent = `${matches} / 4`;
         resetTurn();
         if (matches === 4) {
+            stopBackgroundMusic();
             setTimeout(() => {
+                playWinSound();
+                playWinVoice();
                 document.getElementById("gameResult").classList.remove("hidden");
                 document.getElementById("resultText").textContent = `You completed the game in ${moves} moves!`;
                 saveGameScore('memory_match', moves, totalAttempts);
             }, 500);
         }
     } else {
+        playWrongSound();
         setTimeout(() => {
             firstCard.classList.remove("flipped"); secondCard.classList.remove("flipped");
             firstCard.textContent = "❓"; secondCard.textContent = "❓";

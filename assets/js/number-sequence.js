@@ -1,6 +1,7 @@
 let sequence = [], userAnswer = [], level = 1, score = 0, gameActive = false, totalCorrect = 0, totalAttempts = 0;
 
 function startSequence() {
+    stopBackgroundMusic();
     sequence = []; userAnswer = []; gameActive = false; updateAnswer();
     document.getElementById("gameInstruction").textContent = "Remember the numbers carefully...";
     const sequenceLength = level + 2;
@@ -8,6 +9,8 @@ function startSequence() {
     const display = document.getElementById("sequenceDisplay");
     display.textContent = sequence.join("  ");
     document.getElementById("startButton").disabled = true;
+    playStartVoice();
+    setTimeout(() => startBackgroundMusic(), 1500);
     setTimeout(() => {
         display.textContent = "?"; gameActive = true;
         document.getElementById("gameInstruction").textContent = "Now repeat the sequence using the number buttons.";
@@ -17,6 +20,7 @@ function startSequence() {
 
 function addNumber(number) {
     if (!gameActive) return;
+    playClickSound();
     userAnswer.push(number); updateAnswer();
     if (userAnswer.length === sequence.length) checkAnswer();
 }
@@ -33,17 +37,22 @@ function checkAnswer() {
     const correct = JSON.stringify(sequence) === JSON.stringify(userAnswer);
     const display = document.getElementById("sequenceDisplay");
     if (correct) {
+        playLevelUpSound();
         score += 10; totalCorrect++; document.getElementById("score").textContent = score;
         document.getElementById("gameInstruction").textContent = "Excellent! Correct sequence.";
         display.textContent = "Correct!"; level++;
         document.getElementById("level").textContent = level;
         setTimeout(() => startSequence(), 1500);
     } else {
+        playWrongSound();
         document.getElementById("gameInstruction").textContent = "Try again! The correct sequence was:";
         display.textContent = sequence.join("  ");
+        if (level > 1) playLoseVoice();
         setTimeout(() => startSequence(), 2500);
     }
     if (level > 1 && level % 3 === 0) {
+        stopBackgroundMusic();
+        playWinVoice();
         saveGameScore('number_sequence', score, level, totalCorrect, totalAttempts);
     }
 }

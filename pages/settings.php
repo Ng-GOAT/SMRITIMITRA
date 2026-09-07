@@ -67,6 +67,10 @@ if (!$settings) {
                 <div><strong>Voice Output</strong><p>Enable text-to-speech for AI responses.</p></div>
                 <label class="switch"><input type="checkbox" id="voiceOutputToggle" checked onchange="localStorage.setItem('voiceOutput', this.checked)"><span class="slider"></span></label>
             </div>
+            <div class="setting-row">
+                <div><strong>Game Sound Effects</strong><p>Enable background music and sound effects in games.</p></div>
+                <label class="switch"><input type="checkbox" id="gameSoundToggle" <?php echo localStorage.getItem('gameSoundMuted') !== 'true' ? 'checked' : ''; ?> onchange="toggleGameSound()"><span class="slider"></span></label>
+            </div>
         </section>
 
         <section class="settings-card">
@@ -120,6 +124,7 @@ if (!$settings) {
     </main>
 </div>
 
+<script src="../assets/js/audio.js"></script>
 <script>
 function saveSetting(field, value) {
     const data = new URLSearchParams({ action: 'update_settings' });

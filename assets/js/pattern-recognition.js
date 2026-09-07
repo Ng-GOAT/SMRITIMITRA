@@ -8,6 +8,7 @@ const patterns = [
 ];
 
 function startPatternGame() {
+    stopBackgroundMusic();
     gameStarted = true;
     const patternIndex = (patternLevel - 1) % patterns.length;
     const currentPattern = patterns[patternIndex];
@@ -23,6 +24,8 @@ function startPatternGame() {
         button.onclick = function() { checkPatternAnswer(option); };
         optionsContainer.appendChild(button);
     });
+    playStartVoice();
+    setTimeout(() => startBackgroundMusic(), 1500);
 }
 
 function checkPatternAnswer(selectedAnswer) {
@@ -30,14 +33,19 @@ function checkPatternAnswer(selectedAnswer) {
     gameStarted = false; totalAttempts++;
     const instruction = document.getElementById("patternInstruction");
     if (selectedAnswer === correctAnswer) {
+        playLevelUpSound();
         patternScore += 10; totalCorrect++; patternLevel++;
         document.getElementById("patternScore").textContent = patternScore;
         document.getElementById("patternLevel").textContent = patternLevel;
         instruction.textContent = "Excellent! Correct answer.";
     } else {
+        playWrongSound();
         instruction.textContent = `Not quite! The correct answer was ${correctAnswer}.`;
+        if (patternLevel > 1) playLoseVoice();
     }
     if (patternLevel > 1 && patternLevel % 3 === 0) {
+        stopBackgroundMusic();
+        playWinVoice();
         saveGameScore('pattern_recognition', patternScore, patternLevel, totalCorrect, totalAttempts);
     }
     setTimeout(() => startPatternGame(), 1500);

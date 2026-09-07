@@ -1,23 +1,15 @@
 function generateReport() {
-    const user = {
-        name: document.getElementById('userName')?.textContent || 'Patient',
-        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
-    };
-
-    fetch('/SmritiMitra/api/dashboard.php?action=get_dashboard')
-        .then(r => r.json())
-        .then(data => {
-            createPDF(user, data);
-        })
-        .catch(() => {
-            const data = {
-                medicines: { total: 0, taken: 0 },
-                games_today: 0,
-                cognitive_score: 0,
-                engagement_streak: 0
-            };
-            createPDF(user, data);
-        });
+    Promise.all([
+        fetch('/SmritiMitra/api/dashboard.php?action=get_dashboard').then(r => r.json()).catch(() => null),
+        fetch('/SmritiMitra/api/settings.php?action=get_profile').then(r => r.json()).catch(() => null)
+    ]).then(([dashData, profileData]) => {
+        const user = {
+            name: profileData?.profile?.full_name || document.querySelector('.patient-avatar-large, .profile-avatar-large, .user-avatar')?.textContent?.trim() || 'Patient',
+            date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+        };
+        const data = dashData || { medicines: { total: 0, taken: 0 }, games_today: 0, cognitive_score: 0, engagement_streak: 0 };
+        createPDF(user, data);
+    });
 }
 
 function createPDF(user, data) {
@@ -29,11 +21,9 @@ function createPDF(user, data) {
     const contentWidth = pageWidth - 2 * margin;
     let y = margin;
 
-    // Header Background
     doc.setFillColor(109, 93, 252);
     doc.rect(0, 0, pageWidth, 45, 'F');
 
-    // Title
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
     doc.setFont('helvetica', 'bold');
@@ -48,7 +38,6 @@ function createPDF(user, data) {
 
     y = 55;
 
-    // Patient Info Section
     doc.setFillColor(245, 247, 251);
     doc.roundedRect(margin, y, contentWidth, 30, 3, 3, 'F');
 
@@ -64,7 +53,6 @@ function createPDF(user, data) {
 
     y = 95;
 
-    // Summary Section Title
     doc.setFillColor(109, 93, 252);
     doc.roundedRect(margin, y, contentWidth, 10, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
@@ -74,7 +62,6 @@ function createPDF(user, data) {
 
     y = 112;
 
-    // Summary Cards
     const medTotal = data.medicines?.total || 0;
     const medTaken = data.medicines?.taken || 0;
     const gamesToday = data.games_today || 0;
@@ -82,10 +69,10 @@ function createPDF(user, data) {
     const streak = data.engagement_streak || 0;
 
     const summaryItems = [
-        { label: 'Cognitive Score', value: cognitive + '%', icon: '🧠' },
-        { label: 'Medicines Taken', value: medTaken + '/' + medTotal, icon: '💊' },
-        { label: 'Games Played', value: gamesToday.toString(), icon: '🎮' },
-        { label: 'Engagement Streak', value: streak + ' Days', icon: '🔥' }
+        { label: 'Cognitive Score', value: cognitive + '%' },
+        { label: 'Medicines Taken', value: medTaken + '/' + medTotal },
+        { label: 'Games Played', value: gamesToday.toString() },
+        { label: 'Engagement Streak', value: streak + ' Days' }
     ];
 
     const cardWidth = (contentWidth - 15) / 2;
@@ -113,7 +100,6 @@ function createPDF(user, data) {
 
     y = 175;
 
-    // Performance Section
     doc.setFillColor(109, 93, 252);
     doc.roundedRect(margin, y, contentWidth, 10, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
@@ -138,16 +124,13 @@ function createPDF(user, data) {
         doc.setFont('helvetica', 'normal');
         doc.text(item.label, margin, itemY + 4);
 
-        // Progress bar background
         doc.setFillColor(229, 231, 235);
         doc.roundedRect(margin + 50, itemY, 100, 6, 2, 2, 'F');
 
-        // Progress bar fill
         const fillWidth = (item.value / 100) * 100;
         doc.setFillColor(109, 93, 252);
         doc.roundedRect(margin + 50, itemY, fillWidth, 6, 2, 2, 'F');
 
-        // Percentage
         doc.setTextColor(30, 41, 59);
         doc.setFontSize(10);
         doc.setFont('helvetica', 'bold');
@@ -156,7 +139,6 @@ function createPDF(user, data) {
 
     y = 245;
 
-    // AI Insights
     doc.setFillColor(109, 93, 252);
     doc.roundedRect(margin, y, contentWidth, 10, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
@@ -189,7 +171,6 @@ function createPDF(user, data) {
     doc.setFontSize(9);
     doc.text('Note: This is an AI-generated insight, not a medical diagnosis.', margin + 8, y + 32);
 
-    // Footer
     doc.setFillColor(245, 247, 251);
     doc.rect(0, 277, pageWidth, 20, 'F');
 
@@ -199,24 +180,35 @@ function createPDF(user, data) {
     doc.text('SmritiMitra - AI Cognitive Care Companion | Report Generated: ' + user.date, margin, 285);
     doc.text('For informational purposes only. Not a medical diagnosis.', margin, 290);
 
-    // Save PDF
     doc.save('SmritiMitra_Report_' + user.date.replace(/\s/g, '_') + '.pdf');
 }
 
 function generateCaregiverReport() {
-    const user = {
-        name: document.getElementById('patientName')?.textContent || 'Patient',
-        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
-    };
-
-    fetch('/SmritiMitra/api/dashboard.php?action=get_caregiver_data')
-        .then(r => r.json())
-        .then(data => {
-            createCaregiverPDF(user, data);
-        })
-        .catch(() => {
-            alert('Could not generate report. Make sure you have a linked patient.');
-        });
+    Promise.all([
+        fetch('/SmritiMitra/api/dashboard.php?action=get_caregiver_data').then(r => r.json()).catch(() => null),
+        fetch('/SmritiMitra/api/settings.php?action=get_profile').then(r => r.json()).catch(() => null)
+    ]).then(([dashData, profileData]) => {
+        if (dashData?.error) {
+            const user = {
+                name: profileData?.profile?.full_name || 'Patient',
+                date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+            };
+            createCaregiverPDF(user, {
+                patient: { full_name: user.name },
+                medicines: { total: 0, taken: 0 },
+                games_today: 0,
+                cognitive_score: 0,
+                engagement_streak: 0,
+                activities: []
+            });
+        } else {
+            const user = {
+                name: dashData?.patient?.full_name || 'Patient',
+                date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+            };
+            createCaregiverPDF(user, dashData);
+        }
+    });
 }
 
 function createCaregiverPDF(user, data) {
@@ -228,7 +220,6 @@ function createCaregiverPDF(user, data) {
     const contentWidth = pageWidth - 2 * margin;
     let y = margin;
 
-    // Header
     doc.setFillColor(109, 93, 252);
     doc.rect(0, 0, pageWidth, 45, 'F');
 
@@ -244,7 +235,6 @@ function createCaregiverPDF(user, data) {
 
     y = 55;
 
-    // Patient Info
     doc.setFillColor(245, 247, 251);
     doc.roundedRect(margin, y, contentWidth, 25, 3, 3, 'F');
 
@@ -259,7 +249,6 @@ function createCaregiverPDF(user, data) {
 
     y = 90;
 
-    // Stats
     const medTotal = data.medicines?.total || 0;
     const medTaken = data.medicines?.taken || 0;
     const games = data.games_today || 0;
@@ -286,6 +275,7 @@ function createCaregiverPDF(user, data) {
         const itemY = y + (index * 10);
         doc.setTextColor(71, 85, 105);
         doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
         doc.text(stat[0] + ':', margin, itemY + 4);
         doc.setTextColor(30, 41, 59);
         doc.setFont('helvetica', 'bold');
@@ -295,7 +285,6 @@ function createCaregiverPDF(user, data) {
 
     y = 155;
 
-    // Recommendations
     doc.setFillColor(109, 93, 252);
     doc.roundedRect(margin, y, contentWidth, 10, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
@@ -327,7 +316,6 @@ function createCaregiverPDF(user, data) {
         doc.text(line, margin + 8, y + 8 + (index * 6));
     });
 
-    // Footer
     doc.setFillColor(245, 247, 251);
     doc.rect(0, 277, pageWidth, 20, 'F');
 

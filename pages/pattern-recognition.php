@@ -1,3 +1,8 @@
+<?php
+session_start();
+include "../config/db.php";
+requireLogin();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

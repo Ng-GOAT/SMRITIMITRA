@@ -39,8 +39,12 @@ function getSettingsLocal() {
 
 function applyOfflineSettings() {
     const s = getSettingsLocal();
-    if (s.dark_mode) document.body.classList.add('dark-mode');
-    if (s.large_text) document.body.classList.add('large-text');
+    if (s.dark_mode === '1' || s.dark_mode === true) document.body.classList.add('dark-mode');
+    if (s.large_text === '1' || s.large_text === true) document.body.classList.add('large-text');
+    if (s.preferredLanguage) {
+        localStorage.setItem('preferredLanguage', s.preferredLanguage);
+        if (typeof window.i18nApply === 'function') window.i18nApply(s.preferredLanguage);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', applyOfflineSettings);

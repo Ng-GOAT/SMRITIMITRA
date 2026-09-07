@@ -125,6 +125,9 @@ function saveSetting(field, value) {
     const data = new URLSearchParams({ action: 'update_settings' });
     data.append(field, value ? '1' : '0');
     fetch('../api/settings.php', { method: 'POST', body: data });
+    const s = JSON.parse(localStorage.getItem('smritimitra_settings') || '{}');
+    s[field] = value ? '1' : '0';
+    localStorage.setItem('smritimitra_settings', JSON.stringify(s));
 }
 
 function applyLanguage(lang) {

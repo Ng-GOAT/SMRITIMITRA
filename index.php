@@ -105,8 +105,6 @@ if ($user) {
         </section>
     </main>
 </div>
-<script src="assets/js/settings.js"></script>
-<script src="assets/js/notifications.js"></script>
 <script src="assets/js/offline.js"></script>
 <script src="assets/js/i18n.js"></script>
 </body>

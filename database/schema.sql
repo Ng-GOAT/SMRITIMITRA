@@ -8,6 +8,7 @@ CREATE TABLE users (
     email VARCHAR(150) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM('patient','caregiver') DEFAULT 'patient',
+    user_code VARCHAR(20) UNIQUE,
     age INT,
     dob DATE,
     preferred_language VARCHAR(50) DEFAULT 'English',

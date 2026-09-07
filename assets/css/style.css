@@ -120,6 +120,36 @@ button {
     font-size: 19px;
 }
 
+/* EMERGENCY CALL BUTTON */
+
+.emergency-call-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 15px 0;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: white;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: center;
+}
+
+.emergency-call-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+    background: linear-gradient(135deg, #b91c1c, #dc2626);
+    color: white;
+}
+
 /* SIDEBAR BOTTOM */
 
 .sidebar-bottom {

@@ -5,9 +5,10 @@ const routineActivities = [
     { id: 4, icon: "💊", name: "Take Medicine", order: 4 },
     { id: 5, icon: "🚶", name: "Morning Walk", order: 5 }
 ];
-let selectedActivities = [], routineScore = 0, routineStarted = false;
+let selectedActivities = [], routineScore = 0, routineStarted = false, gameReady = false;
 
 function startRoutineGame() {
+    if (!gameReady) { unlockAudio(); gameReady = true; }
     stopBackgroundMusic();
     selectedActivities = []; routineStarted = true;
     document.getElementById("routineInstruction").textContent = "Select the activities in the correct daily order.";
@@ -23,13 +24,16 @@ function startRoutineGame() {
         button.onclick = () => selectActivity(activity, button);
         routineItems.appendChild(button);
     });
-    playStartVoice();
-    setTimeout(() => startBackgroundMusic(), 1500);
+    setTimeout(() => {
+        playStartVoice();
+        setTimeout(() => startBackgroundMusic(), 1500);
+    }, 200);
 }
 
 function selectActivity(activity, button) {
     if (!routineStarted) return;
     if (selectedActivities.some(item => item.id === activity.id)) return;
+    if (!gameReady) { unlockAudio(); gameReady = true; }
     playClickSound();
     selectedActivities.push(activity);
     button.classList.add("selected"); button.disabled = true;

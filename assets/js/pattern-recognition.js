@@ -1,4 +1,4 @@
-let patternLevel = 1, patternScore = 0, correctAnswer = "", gameStarted = false, totalCorrect = 0, totalAttempts = 0;
+let patternLevel = 1, patternScore = 0, correctAnswer = "", gameStarted = false, totalCorrect = 0, totalAttempts = 0, gameReady = false;
 
 const patterns = [
     { sequence: ["🔵","🔴","🔵","🔴","?"], answer: "🔵", options: ["🔵","🔴","🟢"] },
@@ -8,6 +8,7 @@ const patterns = [
 ];
 
 function startPatternGame() {
+    if (!gameReady) { unlockAudio(); gameReady = true; }
     stopBackgroundMusic();
     gameStarted = true;
     const patternIndex = (patternLevel - 1) % patterns.length;
@@ -21,11 +22,16 @@ function startPatternGame() {
         const button = document.createElement("button");
         button.classList.add("pattern-option");
         button.textContent = option;
-        button.onclick = function() { checkPatternAnswer(option); };
+        button.onclick = function() {
+            if (!gameReady) { unlockAudio(); gameReady = true; }
+            checkPatternAnswer(option);
+        };
         optionsContainer.appendChild(button);
     });
-    playStartVoice();
-    setTimeout(() => startBackgroundMusic(), 1500);
+    setTimeout(() => {
+        playStartVoice();
+        setTimeout(() => startBackgroundMusic(), 1500);
+    }, 200);
 }
 
 function checkPatternAnswer(selectedAnswer) {

@@ -1,6 +1,7 @@
-let sequence = [], userAnswer = [], level = 1, score = 0, gameActive = false, totalCorrect = 0, totalAttempts = 0;
+let sequence = [], userAnswer = [], level = 1, score = 0, gameActive = false, totalCorrect = 0, totalAttempts = 0, gameReady = false;
 
 function startSequence() {
+    if (!gameReady) { unlockAudio(); gameReady = true; }
     stopBackgroundMusic();
     sequence = []; userAnswer = []; gameActive = false; updateAnswer();
     document.getElementById("gameInstruction").textContent = "Remember the numbers carefully...";
@@ -9,8 +10,10 @@ function startSequence() {
     const display = document.getElementById("sequenceDisplay");
     display.textContent = sequence.join("  ");
     document.getElementById("startButton").disabled = true;
-    playStartVoice();
-    setTimeout(() => startBackgroundMusic(), 1500);
+    setTimeout(() => {
+        playStartVoice();
+        setTimeout(() => startBackgroundMusic(), 1500);
+    }, 200);
     setTimeout(() => {
         display.textContent = "?"; gameActive = true;
         document.getElementById("gameInstruction").textContent = "Now repeat the sequence using the number buttons.";
@@ -20,6 +23,7 @@ function startSequence() {
 
 function addNumber(number) {
     if (!gameActive) return;
+    if (!gameReady) { unlockAudio(); gameReady = true; }
     playClickSound();
     userAnswer.push(number); updateAnswer();
     if (userAnswer.length === sequence.length) checkAnswer();

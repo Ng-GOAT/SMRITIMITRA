@@ -1,8 +1,12 @@
 const cardValues = ["🍎","🍎","🐶","🐶","🌸","🌸","🚗","🚗"];
 let cards = [], firstCard = null, secondCard = null, moves = 0, matches = 0, locked = false;
-let gameStartTime = 0, totalAttempts = 0;
+let gameStartTime = 0, totalAttempts = 0, gameReady = false;
 
 function startGame() {
+    if (!gameReady) {
+        unlockAudio();
+        gameReady = true;
+    }
     stopBackgroundMusic();
     cards = [...cardValues].sort(() => Math.random() - 0.5);
     firstCard = null; secondCard = null; moves = 0; matches = 0; locked = false;
@@ -11,8 +15,12 @@ function startGame() {
     document.getElementById("matches").textContent = "0 / 4";
     document.getElementById("gameResult").classList.add("hidden");
     createBoard();
-    playStartVoice();
-    setTimeout(() => startBackgroundMusic(), 1500);
+    if (gameReady) {
+        setTimeout(() => {
+            playStartVoice();
+            setTimeout(() => startBackgroundMusic(), 1500);
+        }, 200);
+    }
 }
 
 function createBoard() {
@@ -24,7 +32,10 @@ function createBoard() {
         card.dataset.value = value;
         card.dataset.index = index;
         card.innerHTML = "❓";
-        card.addEventListener("click", () => flipCard(card));
+        card.addEventListener("click", () => {
+            if (!gameReady) { unlockAudio(); gameReady = true; }
+            flipCard(card);
+        });
         board.appendChild(card);
     });
 }

@@ -36,10 +36,6 @@
         </a>
     </div>
 
-    <a href="/SmritiMitra/pages/video-call.php" class="emergency-call-btn">
-        <span>&#x1F4DE; Emergency Call</span>
-    </a>
-
     <div class="sidebar-account">
         <p class="menu-title">ACCOUNT</p>
         <a href="/SmritiMitra/pages/profile.php" class="menu-item">
@@ -51,6 +47,10 @@
             <span class="menu-text" data-i18n="settings">Settings</span>
         </a>
     </div>
+
+    <a href="/SmritiMitra/pages/video-call.php" class="emergency-call-btn">
+        <span>&#x1F4DE; Emergency Call</span>
+    </a>
 
     <div class="sidebar-bottom">
         <div class="help-card">

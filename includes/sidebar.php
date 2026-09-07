@@ -46,11 +46,11 @@
             <span class="menu-icon">⚙️</span>
             <span class="menu-text" data-i18n="settings">Settings</span>
         </a>
+        <a href="/SmritiMitra/pages/video-call.php" class="menu-item emergency-item">
+            <span class="menu-icon">📞</span>
+            <span class="menu-text">Emergency Call</span>
+        </a>
     </div>
-
-    <a href="/SmritiMitra/pages/video-call.php" class="emergency-call-btn">
-        <span>&#x1F4DE; Emergency Call</span>
-    </a>
 
     <div class="sidebar-bottom">
         <div class="help-card">

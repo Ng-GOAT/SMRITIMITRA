@@ -108,6 +108,22 @@ window.onload=function(){
     document.getElementById("startBtn").onclick=function(){startGame();};
     document.getElementById("restartBtn").onclick=function(){startGame();};
     document.querySelectorAll(".num-btn").forEach(function(b){b.onclick=function(){addNum(parseInt(b.getAttribute("data-n")));};});
+
+    if(typeof VoiceControl!=="undefined"){
+        VoiceControl.registerCommand("num",["one","two","three","four","five","six","seven","eight","nine","number"],
+            "Say a number to select",function(t){
+                var numMap={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9};
+                var words=["one","two","three","four","five","six","seven","eight","nine"];
+                for(var i=0;i<words.length;i++){
+                    if(t.includes(words[i])){addNum(i+1);return;}
+                }
+                var num=t.match(/\d+/);
+                if(num){var n=parseInt(num[0]);if(n>=1&&n<=9)addNum(n);}
+            });
+        VoiceControl.registerCommand("start_game",["start game","begin","play","start"],
+            "Start the game",function(){startGame();});
+        VoiceControl.speak("Number Sequence loaded. Say start game to begin, then say the numbers.");
+    }
 };
 </script>
 </body>

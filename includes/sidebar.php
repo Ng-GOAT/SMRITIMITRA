@@ -71,3 +71,4 @@
 </div>
 <script src="/SmritiMitra/assets/js/sidebar.js"></script>
 <script src="/SmritiMitra/assets/js/notifications.js"></script>
+<script src="/SmritiMitra/assets/js/voice-control.js"></script>

@@ -99,5 +99,33 @@ $games_today = $gstmt->get_result()->fetch_assoc()['cnt'];
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="../assets/js/pdf-report.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof VoiceControl !== 'undefined') {
+        VoiceControl.registerCommand('memory_match', ['memory match', 'play memory', 'memory game', 'match game'],
+            'Open Memory Match game', function() {
+                VoiceControl.speak('Opening Memory Match game');
+                window.location.href = 'memory-match.php';
+            });
+        VoiceControl.registerCommand('number_sequence', ['number sequence', 'play numbers', 'number game', 'sequence game'],
+            'Open Number Sequence game', function() {
+                VoiceControl.speak('Opening Number Sequence game');
+                window.location.href = 'number-sequence.php';
+            });
+        VoiceControl.registerCommand('pattern', ['pattern recognition', 'play pattern', 'pattern game'],
+            'Open Pattern Recognition game', function() {
+                VoiceControl.speak('Opening Pattern Recognition game');
+                window.location.href = 'pattern-recognition.php';
+            });
+        VoiceControl.registerCommand('routine', ['routine challenge', 'play routine', 'routine game', 'object recognition'],
+            'Open Routine Challenge game', function() {
+                VoiceControl.speak('Opening Routine Challenge game');
+                window.location.href = 'routine-challenge.php';
+            });
+
+        VoiceControl.speak('Games page loaded. You can say: Play memory, Play numbers, Play pattern, or Play routine.');
+    }
+});
+</script>
 </body>
 </html>

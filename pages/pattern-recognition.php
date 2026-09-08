@@ -101,6 +101,21 @@ function checkAnswer(sel){
 window.onload=function(){
     document.getElementById("startBtn").onclick=function(){startGame();};
     document.getElementById("restartBtn").onclick=function(){startGame();};
+
+    if(typeof VoiceControl!=="undefined"){
+        VoiceControl.registerCommand("select_option",["select","option","choose","answer","pick"],
+            "Select an answer option",function(t){
+                var btns=document.querySelectorAll("#pOptions button");
+                for(var i=0;i<btns.length;i++){
+                    if(t.includes(btns[i].textContent.toLowerCase())){btns[i].click();return;}
+                }
+                var num=t.match(/\d+/);
+                if(num){var idx=parseInt(num[0])-1;if(idx>=0&&idx<btns.length)btns[idx].click();}
+            });
+        VoiceControl.registerCommand("start_game",["start game","begin","play","start"],
+            "Start the game",function(){startGame();});
+        VoiceControl.speak("Pattern Recognition loaded. Say start game to begin, then say the answer.");
+    }
 };
 </script>
 </body>

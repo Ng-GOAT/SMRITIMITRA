@@ -134,6 +134,26 @@ window.onload=function(){
     document.getElementById("startBtn").onclick=function(){startGame();};
     document.getElementById("restartBtn").onclick=function(){startGame();};
     document.getElementById("playAgainBtn").onclick=function(){startGame();};
+
+    if(typeof VoiceControl!=="undefined"){
+        VoiceControl.registerCommand("flip",["flip card","select card","card","choose"],
+            "Flip a card by number",function(t){
+                var num=t.match(/\d+/);
+                if(num){
+                    var idx=parseInt(num[0])-1;
+                    var cards=document.querySelectorAll(".memory-card:not(.matched):not(.flipped)");
+                    if(idx>=0&&idx<cards.length)flip(cards[idx]);
+                }else{
+                    var unmatched=document.querySelectorAll(".memory-card:not(.matched):not(.flipped)");
+                    if(unmatched.length>0)flip(unmatched[0]);
+                }
+            });
+        VoiceControl.registerCommand("start_game",["start game","begin","play","start"],
+            "Start the game",function(){startGame();});
+        VoiceControl.registerCommand("restart",["restart","again","reset","new game"],
+            "Restart the game",function(){startGame();});
+        VoiceControl.speak("Memory Match loaded. Say start game to begin, then say flip card to select cards.");
+    }
 };
 </script>
 </body>

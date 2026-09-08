@@ -114,6 +114,22 @@ function checkOrder(){
 window.onload=function(){
     document.getElementById("startBtn").onclick=function(){startGame();};
     document.getElementById("restartBtn").onclick=function(){startGame();};
+
+    if(typeof VoiceControl!=="undefined"){
+        VoiceControl.registerCommand("move_up",["move up","up","shift up","go up"],
+            "Move item up",function(){
+                if(tasks.length>0)moveItem(tasks[0],-1);
+            });
+        VoiceControl.registerCommand("move_down",["move down","down","shift down","go down"],
+            "Move item down",function(){
+                if(tasks.length>0)moveItem(tasks[0],1);
+            });
+        VoiceControl.registerCommand("done",["done","submit","check","verify","finish"],
+            "Check the order",function(){checkOrder();});
+        VoiceControl.registerCommand("start_game",["start game","begin","play","start"],
+            "Start the game",function(){startGame();});
+        VoiceControl.speak("Routine Challenge loaded. Say start game to begin.");
+    }
 };
 </script>
 </body>

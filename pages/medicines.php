@@ -130,6 +130,23 @@ function takeMedicine(id) {
     fetch('../api/medicines.php', { method:'POST', body: new URLSearchParams({ action:'take_medicine', medicine_id:id }) })
     .then(r=>r.json()).then(d => { if(d.success) location.reload(); });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    if(typeof VoiceControl !== 'undefined') {
+        VoiceControl.registerCommand('take_medicine', ['take medicine', 'took medicine', 'medicine done', 'taken'],
+            'Mark medicine as taken', function() {
+                var pending = document.querySelector('[onclick*="takeMedicine"]');
+                if(pending) { pending.click(); VoiceControl.speak('Medicine marked as taken'); }
+                else { VoiceControl.speak('No pending medicines to take'); }
+            });
+        VoiceControl.registerCommand('add_medicine', ['add medicine', 'new medicine', 'add new'],
+            'Open add medicine form', function() {
+                showAddMedicine();
+                VoiceControl.speak('Add medicine form opened');
+            });
+        VoiceControl.speak('Medicines page loaded. Say take medicine or add medicine.');
+    }
+});
 </script>
 </body>
 </html>

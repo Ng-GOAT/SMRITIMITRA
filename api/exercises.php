@@ -37,6 +37,20 @@ switch ($action) {
         $duration = intval($_POST['duration_minutes'] ?? 10);
         $difficulty = sanitize($_POST['difficulty'] ?? 'easy');
 
+        if (isset($_FILES['video_file']) && $_FILES['video_file']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['video_file'];
+            $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+            $allowed = ['mp4', 'webm', 'ogg'];
+            if (in_array($ext, $allowed) && $file['size'] <= 100 * 1024 * 1024) {
+                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/SmritiMitra/uploads/exercises/';
+                if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+                $filename = 'ex_' . time() . '.' . $ext;
+                if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+                    $video_url = '/SmritiMitra/uploads/exercises/' . $filename;
+                }
+            }
+        }
+
         $stmt = $conn->prepare("INSERT INTO exercises (title, description, video_url, category, duration_minutes, difficulty) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssis", $title, $description, $video_url, $category, $duration, $difficulty);
 

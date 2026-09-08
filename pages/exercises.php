@@ -24,6 +24,7 @@ $user = getCurrentUser();
         .exercise-card:hover { transform:translateY(-5px);box-shadow:0 15px 35px rgba(0,0,0,0.1); }
         .video-container { position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000; }
         .video-container iframe { position:absolute;top:0;left:0;width:100%;height:100%;border:none; }
+        .video-container video { position:absolute;top:0;left:0;width:100%;height:100%;border:none; }
         .video-placeholder { position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea,#764ba2);color:white;font-size:60px; }
         .exercise-info { padding:20px; }
         .exercise-meta { display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap; }
@@ -88,7 +89,7 @@ $user = getCurrentUser();
 <div id="addExerciseModal" class="modal-overlay">
     <div class="modal-content">
         <h2 style="margin-bottom:20px;">Add Exercise</h2>
-        <form id="addExerciseForm">
+        <form id="addExerciseForm" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" name="title" placeholder="e.g., LI4 Acupressure for Memory" required>
@@ -98,9 +99,10 @@ $user = getCurrentUser();
                 <textarea name="description" placeholder="Describe the exercise steps, benefits, and how to perform it..."></textarea>
             </div>
             <div class="form-group">
-                <label>Video URL (YouTube embed link)</label>
-                <input type="url" name="video_url" placeholder="https://www.youtube.com/embed/VIDEO_ID">
-                <small style="color:#64748b;">Paste the YouTube embed URL (e.g., https://www.youtube.com/embed/abc123)</small>
+                <label>Video (YouTube URL or Upload MP4)</label>
+                <input type="url" name="video_url" placeholder="https://www.youtube.com/embed/VIDEO_ID" style="margin-bottom:10px;">
+                <input type="file" name="video_file" accept="video/mp4,video/webm,video/ogg" style="padding:10px;border:2px solid #e2e8f0;border-radius:10px;width:100%;">
+                <small style="color:#64748b;">Upload MP4 video (max 100MB) OR paste YouTube embed URL</small>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
                 <div class="form-group">
@@ -179,7 +181,11 @@ function renderExercises() {
 
         var videoHtml = '';
         if (ex.video_url) {
-            videoHtml = '<div class="video-container"><iframe src="' + ex.video_url + '" allowfullscreen></iframe></div>';
+            if (ex.video_url.includes('youtube.com') || ex.video_url.includes('youtu.be')) {
+                videoHtml = '<div class="video-container"><iframe src="' + ex.video_url + '" allowfullscreen></iframe></div>';
+            } else {
+                videoHtml = '<div class="video-container"><video controls preload="metadata"><source src="' + ex.video_url + '" type="video/mp4">Your browser does not support video.</video></div>';
+            }
         } else {
             videoHtml = '<div class="video-placeholder">&#x1F3AC;</div>';
         }
@@ -217,13 +223,30 @@ function filterCategory(cat) {
 
 function watchVideo(url, title, desc) {
     document.getElementById('videoTitle').textContent = title;
-    document.getElementById('videoFrame').src = url;
     document.getElementById('videoDescription').textContent = desc;
+    var frame = document.getElementById('videoFrame');
+    var container = frame.parentElement;
+
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        frame.style.display = 'block';
+        frame.src = url;
+    } else {
+        frame.style.display = 'none';
+        var vid = document.createElement('video');
+        vid.id = 'uploadedVideo';
+        vid.controls = true;
+        vid.autoplay = true;
+        vid.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+        vid.innerHTML = '<source src="' + url + '" type="video/mp4">';
+        container.appendChild(vid);
+    }
     document.getElementById('videoModal').style.display = 'flex';
 }
 
 function closeVideoModal() {
     document.getElementById('videoFrame').src = '';
+    var vid = document.getElementById('uploadedVideo');
+    if (vid) vid.remove();
     document.getElementById('videoModal').style.display = 'none';
 }
 
@@ -239,17 +262,10 @@ function hideAddExercise() {
 document.getElementById('addExerciseForm').addEventListener('submit', function(e) {
     e.preventDefault();
     var fd = new FormData(this);
+    fd.append('action', 'add_exercise');
     fetch('/SmritiMitra/api/exercises.php', {
         method: 'POST',
-        body: new URLSearchParams({
-            action: 'add_exercise',
-            title: fd.get('title'),
-            description: fd.get('description'),
-            video_url: fd.get('video_url'),
-            category: fd.get('category'),
-            duration_minutes: fd.get('duration_minutes'),
-            difficulty: fd.get('difficulty')
-        })
+        body: fd
     })
     .then(r => r.json())
     .then(data => {

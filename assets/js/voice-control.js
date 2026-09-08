@@ -196,18 +196,73 @@ var VoiceControl = {
             return;
         }
 
+        var bestMatch = null;
+        var bestScore = 0;
+
         for (var key in this.commands) {
             var cmd = this.commands[key];
             for (var i = 0; i < cmd.phrases.length; i++) {
-                if (transcript.includes(cmd.phrases[i])) {
-                    this.showFeedback('Executing: ' + cmd.description);
-                    cmd.action(transcript);
-                    return;
+                var phrase = cmd.phrases[i];
+                var score = this.calculateMatch(transcript, phrase);
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = cmd;
                 }
             }
         }
 
-        this.showFeedback('Command not recognized. Say "help" for options.');
+        if (bestMatch && bestScore >= 0.5) {
+            this.showFeedback('Executing: ' + bestMatch.description);
+            bestMatch.action(transcript);
+        } else {
+            this.showFeedback('Command not recognized. Say "help" for options.');
+        }
+    },
+
+    calculateMatch: function(transcript, phrase) {
+        if (transcript === phrase) return 1.0;
+        if (transcript.includes(phrase)) return 0.9;
+
+        var tWords = transcript.split(' ');
+        var pWords = phrase.split(' ');
+        var matches = 0;
+
+        for (var i = 0; i < pWords.length; i++) {
+            for (var j = 0; j < tWords.length; j++) {
+                if (tWords[j] === pWords[i]) {
+                    matches++;
+                    break;
+                }
+                if (this.levenshtein(tWords[j], pWords[i]) <= 2) {
+                    matches += 0.7;
+                    break;
+                }
+            }
+        }
+
+        return pWords.length > 0 ? matches / pWords.length : 0;
+    },
+
+    levenshtein: function(a, b) {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+        var matrix = [];
+        for (var i = 0; i <= b.length; i++) matrix[i] = [i];
+        for (var j = 0; j <= a.length; j++) matrix[0][j] = j;
+        for (var i = 1; i <= b.length; i++) {
+            for (var j = 1; j <= a.length; j++) {
+                if (b.charAt(i-1) === a.charAt(j-1)) {
+                    matrix[i][j] = matrix[i-1][j-1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i-1][j-1] + 1,
+                        matrix[i][j-1] + 1,
+                        matrix[i-1][j] + 1
+                    );
+                }
+            }
+        }
+        return matrix[b.length][a.length];
     },
 
     registerCommand: function(name, phrases, description, action) {
@@ -221,105 +276,96 @@ var VoiceControl = {
     registerDefaultCommands: function() {
         var self = this;
 
-        this.registerCommand('help', ['help', 'what can you do', 'commands', 'options'],
+        this.registerCommand('help', ['help', 'what can you do', 'commands', 'options', 'what commands', 'tell me commands'],
             'Shows available commands', function() {
-                self.speak('Available commands: Open games, Open medicines, Open memories, Open exercises, Open companion, Open caregiver, Open profile, Open settings, Go home, Go back, Read page, Stop speaking, Emergency call.');
+                self.speak('Available commands: Open games, Open medicines, Open memories, Open exercises, Open companion, Open caregiver, Open profile, Open settings, Go home, Go back, Read page, Stop speaking, Emergency call, Continuous mode, Stop listening.');
             });
 
-        this.registerCommand('home', ['go home', 'open home', 'dashboard', 'home'],
+        this.registerCommand('home', ['go home', 'open home', 'dashboard', 'home', 'go to home', 'open dashboard'],
             'Navigate to dashboard', function() {
                 self.speak('Opening dashboard');
                 window.location.href = '/SmritiMitra/index.php';
             });
 
-        this.registerCommand('games', ['open games', 'games', 'play games', 'cognitive games', 'start game'],
+        this.registerCommand('games', ['open games', 'games', 'play games', 'cognitive games', 'start game', 'go to games', 'open game'],
             'Navigate to games', function() {
                 self.speak('Opening cognitive games');
                 window.location.href = '/SmritiMitra/pages/games.php';
             });
 
-        this.registerCommand('medicines', ['open medicines', 'medicines', 'my medicines', 'medicine'],
+        this.registerCommand('medicines', ['open medicines', 'medicines', 'my medicines', 'medicine', 'go to medicines', 'open medicine'],
             'Navigate to medicines', function() {
                 self.speak('Opening medicines');
                 window.location.href = '/SmritiMitra/pages/medicines.php';
             });
 
-        this.registerCommand('memories', ['open memories', 'memories', 'memory journey', 'memory'],
+        this.registerCommand('memories', ['open memories', 'memories', 'memory journey', 'memory', 'go to memories', 'open memory'],
             'Navigate to memories', function() {
                 self.speak('Opening memory journey');
                 window.location.href = '/SmritiMitra/pages/memories.php';
             });
 
-        this.registerCommand('exercises', ['open exercises', 'exercises', 'exercise'],
+        this.registerCommand('exercises', ['open exercises', 'exercises', 'exercise', 'go to exercises', 'open exercise'],
             'Navigate to exercises', function() {
                 self.speak('Opening exercises');
                 window.location.href = '/SmritiMitra/pages/exercises.php';
             });
 
-        this.registerCommand('companion', ['open companion', 'companion', 'ai companion', 'chat'],
+        this.registerCommand('companion', ['open companion', 'companion', 'ai companion', 'chat', 'go to companion', 'open ai'],
             'Navigate to AI companion', function() {
                 self.speak('Opening AI companion');
                 window.location.href = '/SmritiMitra/pages/companion.php';
             });
 
-        this.registerCommand('caregiver', ['open caregiver', 'caregiver'],
+        this.registerCommand('caregiver', ['open caregiver', 'caregiver', 'go to caregiver', 'open care'],
             'Navigate to caregiver', function() {
                 self.speak('Opening caregiver dashboard');
                 window.location.href = '/SmritiMitra/pages/caregiver.php';
             });
 
-        this.registerCommand('profile', ['open profile', 'profile', 'my profile'],
+        this.registerCommand('profile', ['open profile', 'profile', 'my profile', 'go to profile'],
             'Navigate to profile', function() {
                 self.speak('Opening profile');
                 window.location.href = '/SmritiMitra/pages/profile.php';
             });
 
-        this.registerCommand('settings', ['open settings', 'settings'],
+        this.registerCommand('settings', ['open settings', 'settings', 'go to settings'],
             'Navigate to settings', function() {
                 self.speak('Opening settings');
                 window.location.href = '/SmritiMitra/pages/settings.php';
             });
 
-        this.registerCommand('emergency', ['emergency', 'emergency call', 'call help', 'help me', 'sos'],
+        this.registerCommand('emergency', ['emergency', 'emergency call', 'call help', 'help me', 'sos', 'call emergency'],
             'Start emergency call', function() {
                 self.speak('Starting emergency call');
                 window.location.href = '/SmritiMitra/pages/video-call.php';
             });
 
-        this.registerCommand('stop', ['stop', 'stop speaking', 'quiet', 'silence', 'shut up'],
+        this.registerCommand('stop', ['stop', 'stop speaking', 'quiet', 'silence', 'shut up', 'be quiet'],
             'Stop speaking', function() {
                 window.speechSynthesis.cancel();
                 self.showFeedback('Stopped speaking');
             });
 
-        this.registerCommand('read', ['read page', 'read this', 'what is on screen', 'read'],
-            'Read page content', function() {
-                var main = document.querySelector('.main-content');
-                if (main) {
-                    var text = main.innerText.substring(0, 500);
-                    self.speak(text);
-                }
-            });
-
-        this.registerCommand('back', ['go back', 'back', 'previous page'],
+        this.registerCommand('back', ['go back', 'back', 'previous page', 'return', 'go to back'],
             'Go back', function() {
                 window.history.back();
             });
 
-        this.registerCommand('logout', ['logout', 'sign out', 'log out'],
+        this.registerCommand('logout', ['logout', 'sign out', 'log out', 'log me out'],
             'Logout', function() {
                 self.speak('Logging out');
                 window.location.href = '/SmritiMitra/pages/logout.php';
             });
 
-        this.registerCommand('continuous_on', ['continuous mode', 'always listen', 'keep listening', 'always on', 'stay on'],
+        this.registerCommand('continuous_on', ['continuous mode', 'always listen', 'keep listening', 'always on', 'stay on', 'start continuous', 'continuous on'],
             'Enable continuous listening mode', function() {
                 self.continuousMode = true;
                 self.showFeedback('Continuous mode ON - I will always listen');
                 self.speak('Continuous mode activated. I will always listen to your commands.');
             });
 
-        this.registerCommand('continuous_off', ['stop listening', 'continuous off', 'turn off', 'disable continuous', 'sleep'],
+        this.registerCommand('continuous_off', ['stop listening', 'continuous off', 'turn off', 'disable continuous', 'sleep', 'stop continuous'],
             'Disable continuous listening mode', function() {
                 self.continuousMode = false;
                 self.stop();
@@ -332,22 +378,22 @@ var VoiceControl = {
                 window.history.back();
             });
 
-        this.registerCommand('refresh', ['refresh', 'reload', 'reload page'],
+        this.registerCommand('refresh', ['refresh', 'reload', 'reload page', 'refresh page'],
             'Refresh current page', function() {
                 window.location.reload();
             });
 
-        this.registerCommand('scroll_down', ['scroll down', 'go down', 'page down'],
+        this.registerCommand('scroll_down', ['scroll down', 'go down', 'page down', 'down'],
             'Scroll down', function() {
                 window.scrollBy(0, 300);
             });
 
-        this.registerCommand('scroll_up', ['scroll up', 'go up', 'page up'],
+        this.registerCommand('scroll_up', ['scroll up', 'go up', 'page up', 'up'],
             'Scroll up', function() {
                 window.scrollBy(0, -300);
             });
 
-        this.registerCommand('read_page', ['read page', 'read this', 'read screen', 'what is here'],
+        this.registerCommand('read_page', ['read page', 'read this', 'read screen', 'what is here', 'read aloud'],
             'Read page content aloud', function() {
                 var main = document.querySelector('.main-content');
                 if (main) {
@@ -356,7 +402,7 @@ var VoiceControl = {
                 }
             });
 
-        this.registerCommand('repeat', ['repeat', 'say again', 'what did you say', 'repeat that'],
+        this.registerCommand('repeat', ['repeat', 'say again', 'what did you say', 'repeat that', 'say that again'],
             'Repeat last feedback', function() {
                 var fb = document.getElementById('voiceCommandFeedback');
                 if (fb && fb.textContent) {
@@ -364,13 +410,13 @@ var VoiceControl = {
                 }
             });
 
-        this.registerCommand('yes', ['yes', 'yeah', 'confirm', 'ok', 'okay', 'sure'],
+        this.registerCommand('yes', ['yes', 'yeah', 'confirm', 'ok', 'okay', 'sure', 'yep'],
             'Confirm action', function() {
                 var confirmBtn = document.querySelector('.confirm-yes, [onclick*="confirm"]');
                 if (confirmBtn) confirmBtn.click();
             });
 
-        this.registerCommand('no', ['no', 'nope', 'cancel', 'never mind', 'forget it'],
+        this.registerCommand('no', ['no', 'nope', 'cancel', 'never mind', 'forget it', 'nah'],
             'Cancel action', function() {
                 var cancelBtn = document.querySelector('.confirm-no, [onclick*="cancel"]');
                 if (cancelBtn) cancelBtn.click();

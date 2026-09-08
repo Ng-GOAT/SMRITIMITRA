@@ -26,6 +26,10 @@
             <span class="menu-icon">💊</span>
             <span class="menu-text" data-i18n="medicines">My Medicines</span>
         </a>
+        <a href="/SmritiMitra/pages/exercises.php" class="menu-item">
+            <span class="menu-icon">🧘</span>
+            <span class="menu-text">Exercises</span>
+        </a>
         <a href="/SmritiMitra/pages/companion.php" class="menu-item">
             <span class="menu-icon">🎙️</span>
             <span class="menu-text" data-i18n="companion">AI Companion</span>

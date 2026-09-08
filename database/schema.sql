@@ -108,3 +108,16 @@ CREATE TABLE user_settings (
     preferred_language VARCHAR(50) DEFAULT 'English',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- Exercises (Acupressure & Memory Recovery)
+CREATE TABLE exercises (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    description TEXT,
+    video_url VARCHAR(500),
+    category VARCHAR(50) DEFAULT 'acupressure',
+    duration_minutes INT DEFAULT 10,
+    difficulty ENUM('easy','medium','hard') DEFAULT 'easy',
+    is_active TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

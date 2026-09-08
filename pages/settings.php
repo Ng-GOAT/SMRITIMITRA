@@ -69,7 +69,7 @@ if (!$settings) {
             </div>
             <div class="setting-row">
                 <div><strong>Game Sound Effects</strong><p>Enable background music and sound effects in games.</p></div>
-                <label class="switch"><input type="checkbox" id="gameSoundToggle" <?php echo localStorage.getItem('gameSoundMuted') !== 'true' ? 'checked' : ''; ?> onchange="toggleGameSound()"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="gameSoundToggle" checked onchange="toggleGameSound()"><span class="slider"></span></label>
             </div>
         </section>
 
@@ -140,11 +140,19 @@ function applyLanguage(lang) {
     if (typeof window.i18nApply === 'function') window.i18nApply(lang);
 }
 
+function toggleGameSound() {
+    var toggle = document.getElementById('gameSoundToggle');
+    var muted = !toggle.checked;
+    localStorage.setItem('gameSoundMuted', muted.toString());
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    const d = document.getElementById('darkModeToggle');
-    const l = document.getElementById('largeTextToggle');
+    var d = document.getElementById('darkModeToggle');
+    var l = document.getElementById('largeTextToggle');
+    var g = document.getElementById('gameSoundToggle');
     if (d && d.checked) document.body.classList.add('dark-mode');
     if (l && l.checked) document.body.classList.add('large-text');
+    if (g) g.checked = localStorage.getItem('gameSoundMuted') !== 'true';
 });
 </script>
 </body>

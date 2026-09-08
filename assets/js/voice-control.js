@@ -15,6 +15,7 @@ var VoiceControl = {
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
             console.log('Speech recognition not supported');
+            this.showFeedback('Voice not supported. Use Chrome or Edge browser.');
             return;
         }
 
@@ -22,17 +23,19 @@ var VoiceControl = {
         this.recognition = new SpeechRecognition();
         this.recognition.continuous = false;
         this.recognition.interimResults = false;
-        this.recognition.lang = 'en-IN';
+        this.recognition.lang = 'en-US';
         this.recognition.maxAlternatives = 1;
 
         var self = this;
         this.recognition.onresult = function(event) {
             var transcript = event.results[0][0].transcript.toLowerCase().trim();
             var confidence = event.results[0][0].confidence;
+            console.log('Voice heard:', transcript, 'confidence:', confidence);
             self.handleVoiceInput(transcript, confidence);
         };
 
         this.recognition.onend = function() {
+            console.log('Recognition ended');
             self.isListening = false;
             self.updateMicButton();
         };
@@ -42,7 +45,13 @@ var VoiceControl = {
             self.isListening = false;
             self.updateMicButton();
             if (event.error === 'not-allowed') {
-                self.speak('Microphone access denied. Please allow microphone access.');
+                self.showFeedback('Microphone blocked. Allow mic in browser settings.');
+            } else if (event.error === 'no-speech') {
+                self.showFeedback('No speech heard. Tap mic and try again.');
+            } else if (event.error === 'audio-capture') {
+                self.showFeedback('No microphone found. Connect a mic.');
+            } else {
+                self.showFeedback('Error: ' + event.error);
             }
         };
 
@@ -126,16 +135,17 @@ var VoiceControl = {
 
     start: function() {
         if (!this.isSupported) {
-            this.speak('Voice control is not supported in this browser.');
+            this.showFeedback('Voice not supported. Use Chrome or Edge browser.');
             return;
         }
         try {
             this.recognition.start();
             this.isListening = true;
             this.updateMicButton();
-            this.showFeedback('Listening...');
+            this.showFeedback('Listening... Speak now!');
         } catch(e) {
             console.log('Recognition error:', e);
+            this.showFeedback('Error starting voice. Tap mic again.');
         }
     },
 

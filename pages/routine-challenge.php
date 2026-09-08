@@ -128,7 +128,6 @@ window.onload=function(){
             "Check the order",function(){checkOrder();});
         VoiceControl.registerCommand("start_game",["start game","begin","play","start"],
             "Start the game",function(){startGame();});
-        VoiceControl.speak("Routine Challenge loaded. Say start game to begin.");
     }
 };
 </script>

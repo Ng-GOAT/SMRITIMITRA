@@ -122,8 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 VoiceControl.speak('Opening Routine Challenge game');
                 window.location.href = 'routine-challenge.php';
             });
-
-        VoiceControl.speak('Games page loaded. You can say: Play memory, Play numbers, Play pattern, or Play routine.');
     }
 });
 </script>

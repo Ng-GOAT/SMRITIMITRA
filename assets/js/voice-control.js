@@ -134,7 +134,6 @@ var VoiceControl = {
             this.isListening = true;
             this.updateMicButton();
             this.showFeedback('Listening...');
-            this.speak('Yes, I am listening.');
         } catch(e) {
             console.log('Recognition error:', e);
         }
@@ -188,7 +187,7 @@ var VoiceControl = {
             }
         }
 
-        this.speak('Sorry, I did not understand. Say "help" for available commands.');
+        this.showFeedback('Command not recognized. Say "help" for options.');
     },
 
     registerCommand: function(name, phrases, description, action) {
@@ -341,4 +340,5 @@ var VoiceControl = {
 
 document.addEventListener('DOMContentLoaded', function() {
     VoiceControl.init();
+    // Don't auto-speak on page load - only speak when user taps mic
 });

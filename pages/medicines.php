@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 showAddMedicine();
                 VoiceControl.speak('Add medicine form opened');
             });
-        VoiceControl.speak('Medicines page loaded. Say take medicine or add medicine.');
     }
 });
 </script>

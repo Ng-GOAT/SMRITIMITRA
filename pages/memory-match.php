@@ -152,7 +152,6 @@ window.onload=function(){
             "Start the game",function(){startGame();});
         VoiceControl.registerCommand("restart",["restart","again","reset","new game"],
             "Restart the game",function(){startGame();});
-        VoiceControl.speak("Memory Match loaded. Say start game to begin, then say flip card to select cards.");
     }
 };
 </script>

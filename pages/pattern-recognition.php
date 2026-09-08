@@ -114,7 +114,6 @@ window.onload=function(){
             });
         VoiceControl.registerCommand("start_game",["start game","begin","play","start"],
             "Start the game",function(){startGame();});
-        VoiceControl.speak("Pattern Recognition loaded. Say start game to begin, then say the answer.");
     }
 };
 </script>

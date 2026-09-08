@@ -326,6 +326,55 @@ var VoiceControl = {
                 self.showFeedback('Continuous mode OFF');
                 self.speak('Continuous mode deactivated.');
             });
+
+        this.registerCommand('go_back', ['go back', 'back', 'previous page', 'return'],
+            'Go back to previous page', function() {
+                window.history.back();
+            });
+
+        this.registerCommand('refresh', ['refresh', 'reload', 'reload page'],
+            'Refresh current page', function() {
+                window.location.reload();
+            });
+
+        this.registerCommand('scroll_down', ['scroll down', 'go down', 'page down'],
+            'Scroll down', function() {
+                window.scrollBy(0, 300);
+            });
+
+        this.registerCommand('scroll_up', ['scroll up', 'go up', 'page up'],
+            'Scroll up', function() {
+                window.scrollBy(0, -300);
+            });
+
+        this.registerCommand('read_page', ['read page', 'read this', 'read screen', 'what is here'],
+            'Read page content aloud', function() {
+                var main = document.querySelector('.main-content');
+                if (main) {
+                    var text = main.innerText.substring(0, 800);
+                    self.speak(text);
+                }
+            });
+
+        this.registerCommand('repeat', ['repeat', 'say again', 'what did you say', 'repeat that'],
+            'Repeat last feedback', function() {
+                var fb = document.getElementById('voiceCommandFeedback');
+                if (fb && fb.textContent) {
+                    self.speak(fb.textContent);
+                }
+            });
+
+        this.registerCommand('yes', ['yes', 'yeah', 'confirm', 'ok', 'okay', 'sure'],
+            'Confirm action', function() {
+                var confirmBtn = document.querySelector('.confirm-yes, [onclick*="confirm"]');
+                if (confirmBtn) confirmBtn.click();
+            });
+
+        this.registerCommand('no', ['no', 'nope', 'cancel', 'never mind', 'forget it'],
+            'Cancel action', function() {
+                var cancelBtn = document.querySelector('.confirm-no, [onclick*="cancel"]');
+                if (cancelBtn) cancelBtn.click();
+            });
     },
 
     startMenuMode: function(items, callback) {

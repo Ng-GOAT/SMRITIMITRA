@@ -33,6 +33,9 @@ var VoiceControl = {
             var confidence = event.results[0][0].confidence;
             console.log('Voice heard:', transcript, 'confidence:', confidence);
             self.handleVoiceInput(transcript, confidence);
+            if (self.continuousMode) {
+                setTimeout(function() { self.start(); }, 300);
+            }
         };
 
         this.recognition.onend = function() {
@@ -142,14 +145,17 @@ var VoiceControl = {
             this.showFeedback('Voice not supported. Use Chrome or Edge browser.');
             return;
         }
+        if (this.isListening) return;
         try {
             this.recognition.start();
             this.isListening = true;
             this.updateMicButton();
-            this.showFeedback('Listening... Speak now!');
+            if (!this.continuousMode) {
+                this.showFeedback('Listening... Speak now!');
+            }
         } catch(e) {
             console.log('Recognition error:', e);
-            this.showFeedback('Error starting voice. Tap mic again.');
+            this.isListening = false;
         }
     },
 

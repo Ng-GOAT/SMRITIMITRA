@@ -124,7 +124,7 @@ function showGameReminder() {
 
 function initNotifications() {
     if (!('Notification' in window)) {
-        console.log('Notifications not supported');
+        startOnScreenReminders();
         return;
     }
 
@@ -137,13 +137,20 @@ function initNotifications() {
 
     if (Notification.permission === 'default') {
         Notification.requestPermission().then(perm => {
-            if (perm === 'granted') {
-                startReminderChecks();
-            }
+            startReminderChecks();
+            startOnScreenReminders();
         });
     } else if (Notification.permission === 'granted') {
         startReminderChecks();
+        startOnScreenReminders();
+    } else {
+        startOnScreenReminders();
     }
+}
+
+function startOnScreenReminders() {
+    showGameReminder();
+    setInterval(showGameReminder, 600000);
 }
 
 function startReminderChecks() {

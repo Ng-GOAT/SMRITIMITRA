@@ -10,6 +10,7 @@ var VoiceControl = {
     menuMode: false,
     menuItems: [],
     menuCallback: null,
+    continuousMode: false,
 
     init: function() {
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -38,6 +39,9 @@ var VoiceControl = {
             console.log('Recognition ended');
             self.isListening = false;
             self.updateMicButton();
+            if (self.continuousMode) {
+                setTimeout(function() { self.start(); }, 500);
+            }
         };
 
         this.recognition.onerror = function(event) {
@@ -300,6 +304,21 @@ var VoiceControl = {
             'Logout', function() {
                 self.speak('Logging out');
                 window.location.href = '/SmritiMitra/pages/logout.php';
+            });
+
+        this.registerCommand('continuous_on', ['continuous mode', 'always listen', 'keep listening', 'always on', 'stay on'],
+            'Enable continuous listening mode', function() {
+                self.continuousMode = true;
+                self.showFeedback('Continuous mode ON - I will always listen');
+                self.speak('Continuous mode activated. I will always listen to your commands.');
+            });
+
+        this.registerCommand('continuous_off', ['stop listening', 'continuous off', 'turn off', 'disable continuous', 'sleep'],
+            'Disable continuous listening mode', function() {
+                self.continuousMode = false;
+                self.stop();
+                self.showFeedback('Continuous mode OFF');
+                self.speak('Continuous mode deactivated.');
             });
     },
 

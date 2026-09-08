@@ -50,6 +50,10 @@
             <span class="menu-icon">📞</span>
             <span class="menu-text">Emergency Call</span>
         </a>
+        <a href="/SmritiMitra/pages/logout.php" class="menu-item" style="color:#dc2626;">
+            <span class="menu-icon">🚪</span>
+            <span class="menu-text">Sign Out</span>
+        </a>
     </div>
 
     <div class="sidebar-bottom">
